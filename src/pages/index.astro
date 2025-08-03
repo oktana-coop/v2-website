@@ -1,16 +1,174 @@
----
-
----
-
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>V2 - Edit Fearlessly. Collaborate Asynchronously</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+		
+		<style>
+			:root {
+				--primary-purple: #9352FF;
+				--text-dark: #2c2c2c;
+				--text-light: #666;
+				--bg-light: #fafafa;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			body {
+				font-family: 'Noto Sans', sans-serif;
+				background-color: var(--bg-light);
+				color: var(--text-dark);
+				line-height: 1.6;
+			}
+			
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+				text-align: center;
+			}
+			
+			.logo {
+				margin-bottom: 3rem;
+			}
+			
+			.hero-title {
+				font-size: 3.5rem;
+				font-weight: 600;
+				margin-bottom: 1.5rem;
+				color: var(--text-dark);
+			}
+			
+			.hero-title .highlight {
+				font-weight: 700;
+			}
+			
+			.hero-subtitle {
+				font-size: 1.2rem;
+				color: var(--text-light);
+				margin: 0 auto 3rem auto;
+				max-width: 800px;
+			}
+			
+			.download-btn {
+				background-color: var(--primary-purple);
+				color: white;
+				font-weight: 500;
+				font-size: 1.1rem;
+				padding: 1rem 2rem;
+				border: none;
+				border-radius: 8px;
+				text-decoration: none;
+				display: inline-block;
+			}
+			
+
+			
+			.screenshots {
+				display: flex;
+				justify-content: center;
+				margin-top: 4rem;
+			}
+			
+			.screenshot {
+				width: 100%;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+				border-radius: 16px;
+			}
+			
+
+			
+			@media (max-width: 768px) {
+				.hero-title {
+					font-size: 2.5rem;
+				}
+			}
+		</style>
+		
+
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="container">
+			<div class="logo">
+				<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M77.8461 53.7025V59.9432L51.552 59.86V53.3696L71.1894 36.9774V28.6565H57.7095V36.0621H51.3856V22.4158H77.8461V41.2211L61.4539 53.7025H77.8461Z" fill="#9352FF"/>
+					<path d="M42.5222 22.4158L32.2875 59.9431H20.3886L10.1538 22.4158H18.6412L25.4643 53.9521H27.8774L34.7005 22.4158H42.5222Z" fill="#9352FF"/>
+					<rect x="10.1538" y="66.7124" width="33.8462" height="6.76923" fill="#C6EDC3"/>
+					<rect opacity="0.6" x="44" y="66.7124" width="33.8462" height="6.76923" fill="#F7BEC0"/>
+				</svg>
+			</div>
+			
+			<h1 class="hero-title">
+				Edit <span class="highlight">Fearlessly</span>. Collaborate <span class="highlight">Asynchronously</span>
+			</h1>
+			
+			<p class="hero-subtitle">
+				A local-first editor with Git-style version control, true privacy, and complete control over your data
+			</p>
+			
+			<a href="#" class="download-btn" id="download-btn">Download</a>
+			
+			<script>
+				// https://stackoverflow.com/a/38241481
+				function detectOS() {
+					const userAgent = window.navigator.userAgent,
+						platform = window.navigator?.userAgentData?.platform || window.navigator.platform,
+						macosPlatforms = ['macOS', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+						windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+						iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+					let os = null;
+
+					if (macosPlatforms.indexOf(platform) !== -1) {
+						os = 'Mac OS';
+					} else if (iosPlatforms.indexOf(platform) !== -1) {
+						os = 'iOS';
+					} else if (windowsPlatforms.indexOf(platform) !== -1) {
+						os = 'Windows';
+					} else if (/Android/.test(userAgent)) {
+						os = 'Android';
+					} else if (/Linux/.test(platform)) {
+						os = 'Linux';
+					}
+
+					return os;
+				}
+				
+				// Update the button immediately
+				const downloadBtn = document.getElementById('download-btn');
+				const os = detectOS();
+				
+				switch(os) {
+					case 'Windows':
+						downloadBtn.textContent = 'Download for Windows';
+						downloadBtn.href = '#'; // Replace with actual Windows download URL
+						break;
+					case 'Linux':
+						downloadBtn.textContent = 'Download for Linux';
+						downloadBtn.href = '#'; // Replace with actual Linux download URL
+						break;
+					case 'macOS':
+					default:
+						downloadBtn.textContent = 'Download for macOS';
+						downloadBtn.href = '#'; // Replace with actual macOS download URL
+						break;
+				}
+			</script>
+			
+			<div class="screenshots">
+				<div class="screenshot">
+					<img src="/v2-screenshot.png" alt="V2 Editor interface showing document editing" />
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
