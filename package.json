@@ -6,9 +6,22 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky"
   },
   "dependencies": {
     "astro": "^5.12.8"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5"
+  },
+  "lint-staged": {
+    "{src/**/*,public/**/*,astro.config.mjs,package.json,tsconfig.json}": [
+      "npm run build",
+      "touch docs/.nojekyll",
+      "echo 'www.v2editor.com' > docs/CNAME",
+      "git add docs/"
+    ]
   }
 }
