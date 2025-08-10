@@ -2,5 +2,5 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://oktana-coop.github.io/v2-website/",
+  site: "https://v2editor.com",
 });
