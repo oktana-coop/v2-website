@@ -30,21 +30,45 @@ body {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-dark);
 }
 
-.hero-title .highlight {
-  font-weight: 700;
+.typewriter-container {
+  display: inline;
+}
+
+.typewriter-text {
+  margin: 0;
+  letter-spacing: 0.05em;
+  display: inline;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  background-color: var(--primary-purple);
+  width: 3px;
+  height: 1.1em;
+  animation: blink-caret 1.2s infinite;
+  vertical-align: text-top;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero-subtitle {
   font-size: 1.2rem;
   color: var(--text-light);
   margin: 0 auto 3rem auto;
-  max-width: 800px;
 }
 
 .download-btn {
