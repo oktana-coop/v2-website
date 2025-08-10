@@ -32,16 +32,17 @@ function initOSDetection() {
   switch (os) {
     case "Windows":
       downloadBtn.textContent = "Download for Windows";
-      downloadBtn.href = "#"; // Replace with actual Windows download URL
+      downloadBtn.href = "#";
       break;
     case "Linux":
+    case "Android":
       downloadBtn.textContent = "Download for Linux";
-      downloadBtn.href = "#"; // Replace with actual Linux download URL
       break;
-    case "macOS":
+    case "Mac OS":
+    case "iOS":
     default:
       downloadBtn.textContent = "Download for macOS";
-      downloadBtn.href = "#"; // Replace with actual macOS download URL
+      downloadBtn.href = "#";
       break;
   }
 }
