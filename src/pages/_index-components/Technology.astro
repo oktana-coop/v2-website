@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import automergeLogo from '../../assets/images/automerge.png';
+import pandocLogo from '../../assets/images/pandoc.png';
+import prosemirrorLogo from '../../assets/images/prosemirror.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
+
+const technologies = [
+  {
+    name: 'Automerge',
+    url: 'https://automerge.org/',
+    logo: automergeLogo,
+    description:
+      'Cutting-edge CRDT technology powering version control & async collaboration',
+  },
+  {
+    name: 'Pandoc',
+    url: 'https://pandoc.org/',
+    logo: pandocLogo,
+    description:
+      'The gold standard for interoperability with virtually any rich-text format',
+  },
+  {
+    name: 'ProseMirror',
+    url: 'https://prosemirror.net/',
+    logo: prosemirrorLogo,
+    description:
+      'A battle-tested, collaboration-ready editing framework for the web',
+  },
+];
+---
+
+<div class="flex flex-col gap-10 lg:gap-14">
+  <div class="flex flex-col items-center gap-4">
+    <SectionHeading
+      text="Innovative Core, Proven Foundations"
+      classes="text-center"
+    />
+    <p class={`text-center ${textClasses}`}>
+      Standing on the shoulders of giants
+    </p>
+  </div>
+  <div
+    class="w-full flex flex-col lg:flex-row gap-14 lg:gap-18 items-center lg:justify-around"
+  >
+    {
+      technologies.map((tech) => (
+        <div class="flex flex-col lg:w-1/3 max-w-2xs items-center gap-4 lg:gap-6">
+          <a href={tech.url} target="_blank" rel="noopener">
+            <h3 class="font-sans text-lg font-bold text-center">{tech.name}</h3>
+          </a>
+
+          <Image src={tech.logo} alt={`${tech.name} logo`} />
+          <p class={`text-center ${textClasses}`}>{tech.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
