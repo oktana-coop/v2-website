@@ -5,47 +5,47 @@ function initOSDetection() {
     const userAgent = window.navigator.userAgent,
       platform =
         window.navigator?.userAgentData?.platform || window.navigator.platform,
-      macosPlatforms = ["macOS", "Macintosh", "MacIntel", "MacPPC", "Mac68K"],
-      windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
-      iosPlatforms = ["iPhone", "iPad", "iPod"];
+      macosPlatforms = ['macOS', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'];
     let os = null;
 
     if (macosPlatforms.indexOf(platform) !== -1) {
-      os = "Mac OS";
+      os = 'Mac OS';
     } else if (iosPlatforms.indexOf(platform) !== -1) {
-      os = "iOS";
+      os = 'iOS';
     } else if (windowsPlatforms.indexOf(platform) !== -1) {
-      os = "Windows";
+      os = 'Windows';
     } else if (/Android/.test(userAgent)) {
-      os = "Android";
+      os = 'Android';
     } else if (/Linux/.test(platform)) {
-      os = "Linux";
+      os = 'Linux';
     }
 
     return os;
   }
 
   // Update the button immediately
-  const downloadBtn = document.getElementById("download-btn");
+  const downloadBtn = document.getElementById('download-btn');
   const os = detectOS();
 
   switch (os) {
-    case "Windows":
-      downloadBtn.textContent = "Download for Windows";
-      downloadBtn.href = "#";
+    case 'Windows':
+      downloadBtn.textContent = 'Download for Windows';
+      downloadBtn.href = '#';
       break;
-    case "Linux":
-    case "Android":
-      downloadBtn.textContent = "Download for Linux";
+    case 'Linux':
+    case 'Android':
+      downloadBtn.textContent = 'Download for Linux';
       break;
-    case "Mac OS":
-    case "iOS":
+    case 'Mac OS':
+    case 'iOS':
     default:
-      downloadBtn.textContent = "Download for macOS";
-      downloadBtn.href = "#";
+      downloadBtn.textContent = 'Download for macOS';
+      downloadBtn.href = '#';
       break;
   }
 }
 
 // Initialize when DOM is loaded
-document.addEventListener("DOMContentLoaded", initOSDetection);
+document.addEventListener('DOMContentLoaded', initOSDetection);

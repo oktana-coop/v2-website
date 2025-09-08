@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prettify": "prettier --write ."
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
@@ -16,7 +17,8 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5"
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2"
   },
   "lint-staged": {
     "{src/**/*,public/**/*,astro.config.mjs,package.json,tsconfig.json}": [
