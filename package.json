@@ -10,7 +10,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "astro": "^5.13.5"
+    "@tailwindcss/vite": "^4.1.13",
+    "astro": "^5.13.5",
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "husky": "^9.1.7",
