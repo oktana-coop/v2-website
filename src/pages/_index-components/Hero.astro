@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 
-import Button from '../../components/actions/buttons/Button.astro';
+import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
+import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
 import { textClasses } from '../../components/typography/textStyles.ts';
 ---
 
 <div class="flex flex-auto flex-col gap-12 sm:gap-18">
-  <div class="flex flex-col items-center gap-12">
+  <div class="flex flex-col items-stretch gap-12">
     <div class="flex flex-col items-center gap-6">
       <h1 class="text-center text-[1.7rem] sm:text-4xl md:text-5xl font-serif">
         <span class="typewriter-text" id="typewriter-text"></span>
@@ -22,9 +23,26 @@ import { textClasses } from '../../components/typography/textStyles.ts';
       </p>
     </div>
 
-    <a href=`#`
-      ><Button text="Download for macOS" size="lg" id="download-btn" /></a
-    >
+    <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
+      <a href=`#`
+        ><SolidButton
+          text="Download for macOS"
+          size="lg"
+          id="download-btn"
+          classes="w-full sm:w-auto"
+        /></a
+      >
+      <a
+        href="https://oktana.dev/blog/introducing-v2-editor"
+        target="_blank"
+        rel="noopener"
+        ><OutlineButton
+          text="Read the Manifesto"
+          size="lg"
+          classes="w-full sm:w-auto"
+        /></a
+      >
+    </div>
   </div>
 
   <div class="flex justify-center">
