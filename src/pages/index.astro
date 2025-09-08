@@ -1,79 +1,70 @@
 ---
-import "../styles/main.css";
+import { Image } from 'astro:assets';
+
+import Layout from '../layouts/Layout.astro';
+import NavigationBar from '../components/navigation/NavigationBar.astro';
+import MainContainer from '../components/MainContainer.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/actions/buttons/Button.astro';
+import v2Screenshot from '../assets/images/v2-screenshot.png';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>V2 - Edit Fearlessly. Collaborate Asynchronously</title>
+<Layout title="v2 Editor">
+  <MainContainer>
+    <NavigationBar />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <div class="flex flex-col align-center px-6 gap-10 sm:gap-30 md:gap-40">
+      <div class="flex flex-auto flex-col gap-12 sm:gap-18">
+        <div class="flex flex-col items-center gap-12">
+          <div class="flex flex-col items-center gap-6">
+            <h1
+              class="text-center text-[1.7rem] sm:text-4xl md:text-5xl font-serif"
+            >
+              <span class="typewriter-text" id="typewriter-text"></span>
+              <span
+                class="inline-block bg-purple-500 w-[3px] h-[1.1em] align-text-top typewriter-cursor"
+                id="typewriter-cursor"></span>
+            </h1>
 
-    <script src="../scripts/os-detection.js"></script>
-    <script src="../scripts/typewriter.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="logo">
-        <svg
-          width="88"
-          height="88"
-          viewBox="0 0 88 88"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M77.8461 53.7025V59.9432L51.552 59.86V53.3696L71.1894 36.9774V28.6565H57.7095V36.0621H51.3856V22.4158H77.8461V41.2211L61.4539 53.7025H77.8461Z"
-            fill="#9352FF"></path>
-          <path
-            d="M42.5222 22.4158L32.2875 59.9431H20.3886L10.1538 22.4158H18.6412L25.4643 53.9521H27.8774L34.7005 22.4158H42.5222Z"
-            fill="#9352FF"></path>
-          <rect
-            x="10.1538"
-            y="66.7124"
-            width="33.8462"
-            height="6.76923"
-            fill="#C6EDC3"></rect>
-          <rect
-            opacity="0.6"
-            x="44"
-            y="66.7124"
-            width="33.8462"
-            height="6.76923"
-            fill="#F7BEC0"></rect>
-        </svg>
-      </div>
+            <p
+              class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center m-0 font-light"
+            >
+              A local-first editor with Git-style version control, true privacy,
+              and complete control over your data
+            </p>
+          </div>
 
-      <h1 class="hero-title">
-        <div class="typewriter-container">
-          <span class="typewriter-text" id="typewriter-text"></span>
-          <span class="typewriter-cursor" id="typewriter-cursor"></span>
+          <a href=`#`
+            ><Button text="Download for macOS" size="lg" id="download-btn" /></a
+          >
         </div>
-      </h1>
 
-      <p class="hero-subtitle">
-        A local-first editor with Git-style version control, true privacy, and
-        complete control over your data
-      </p>
-
-      <a href="#" class="download-btn" id="download-btn">Download</a>
-
-      <div class="screenshots">
-        <div class="screenshot">
-          <img
-            src="/v2-screenshot.png"
-            alt="V2 Editor interface showing document editing"
+        <div class="flex justify-center">
+          <Image
+            src={v2Screenshot}
+            alt="v2 screenshot showing document editing"
+            class="drop-shadow-xl/25"
           />
         </div>
       </div>
     </div>
-  </body>
-</html>
+
+    <Footer />
+  </MainContainer>
+</Layout>
+
+<style>
+  .typewriter-cursor {
+    animation: blink-caret 1.2s infinite;
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

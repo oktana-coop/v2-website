@@ -7,35 +7,48 @@ function initTypewriter() {
   let isDeleting = false;
   let typeSpeed = 100;
 
+  // Words to bold and their positions
+  const boldWords = [
+    {
+      word: 'Fearlessly',
+      start: text.indexOf('Fearlessly'),
+      end: text.indexOf('Fearlessly') + 'Fearlessly'.length,
+    },
+    {
+      word: 'Asynchronously',
+      start: text.indexOf('Asynchronously'),
+      end: text.indexOf('Asynchronously') + 'Asynchronously'.length,
+    },
+  ];
+
+  function getCurrentHTML(idx) {
+    let html = '';
+    let i = 0;
+    while (i < idx) {
+      // Check if at start of a bold word
+      const bold = boldWords.find((bw) => i === bw.start);
+      if (bold) {
+        html += '<span class="font-bold">';
+      }
+      html += text[i];
+      // Check if at end of a bold word
+      const boldEnd = boldWords.find((bw) => i === bw.end - 1);
+      if (boldEnd) {
+        html += '</span>';
+      }
+      i++;
+    }
+    return html;
+  }
+
   function typeWriter() {
     if (!isDeleting && charIndex < text.length) {
       // Stop cursor blinking while typing
       cursorElement.style.animationPlayState = 'paused';
       cursorElement.style.opacity = '1';
 
-      // Typing forward
-      const currentChar = text.charAt(charIndex);
-      typewriterElement.innerHTML += currentChar;
-
-      // Add highlight spans for "Fearlessly" and "Asynchronously"
-      if (
-        typewriterElement.innerHTML.includes('Fearlessly') &&
-        !typewriterElement.innerHTML.includes('<span>Fearlessly</span>')
-      ) {
-        typewriterElement.innerHTML = typewriterElement.innerHTML.replace(
-          'Fearlessly',
-          '<span>Fearlessly</span>'
-        );
-      }
-      if (
-        typewriterElement.innerHTML.includes('Asynchronously') &&
-        !typewriterElement.innerHTML.includes('<span>Asynchronously</span>')
-      ) {
-        typewriterElement.innerHTML = typewriterElement.innerHTML.replace(
-          'Asynchronously',
-          '<span>Asynchronously</span>'
-        );
-      }
+      // Typing forward with bold spans
+      typewriterElement.innerHTML = getCurrentHTML(charIndex + 1);
 
       charIndex++;
       typeSpeed = Math.random() * 100 + 50; // Variable typing speed for more natural effect
