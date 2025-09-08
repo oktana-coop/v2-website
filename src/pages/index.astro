@@ -5,15 +5,21 @@ import MainContainer from '../components/MainContainer.astro';
 import Footer from '../components/Footer.astro';
 import Hero from './_index-components/Hero.astro';
 import VersionControl from './_index-components/VersionControl.astro';
+import ContentOverFormatting from './_index-components/ContentOverFormatting.astro';
+import Collaboration from './_index-components/Collaboration.astro';
+import LocalFirst from './_index-components/LocalFirst.astro';
 ---
 
 <Layout title="v2 Editor">
   <MainContainer>
     <NavigationBar />
 
-    <div class="flex flex-col align-center px-6 gap-10 sm:gap-30 md:gap-40">
+    <div class="flex flex-col align-center px-6 gap-20 sm:gap-30 lg:gap-50">
       <Hero />
       <VersionControl />
+      <ContentOverFormatting />
+      <Collaboration />
+      <LocalFirst />
     </div>
 
     <Footer />

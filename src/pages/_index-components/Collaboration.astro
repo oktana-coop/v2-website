@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import screenshot from '../../assets/images/v2-screenshot-collaboration.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
+import BulletList from '../../components/typography/BulletList.astro';
+---
+
+<div class="flex flex-col lg:flex-row lg:justify-between gap-10">
+  <div class="hidden lg:block w-full lg:w-1/2 flex justify-center">
+    <Image
+      src={screenshot}
+      alt="v2 screenshot showing version control capabilities"
+      class="drop-shadow-xl/25"
+    />
+  </div>
+  <div
+    class="w-full lg:w-1/2 lg:max-w-lg flex flex-col gap-4 justify-center align-end"
+  >
+    <SectionHeading text="Collaboration" />
+    <div class="block lg:hidden w-full lg:w-1/2 flex justify-center">
+      <Image
+        src={screenshot}
+        alt="v2 screenshot showing version control capabilities"
+        class="drop-shadow-xl/25"
+      />
+    </div>
+    <p class={textClasses}>
+      Single-player and multi-player mode, on your terms.
+    </p>
+    <BulletList>
+      <li class={textClasses}>Write privately until you’re ready to share</li>
+      <li class={textClasses}>
+        Collaborate asynchronously with structured workflows and no
+        interruptions
+      </li>
+      <li class={textClasses}>Optionally share and collaborate in real time</li>
+    </BulletList>
+  </div>
+</div>

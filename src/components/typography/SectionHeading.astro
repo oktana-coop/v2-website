@@ -1,13 +1,14 @@
 ---
 interface Props {
   text: string;
+  classes?: string;
 }
 
-const { text } = Astro.props;
+const { text, classes } = Astro.props;
 ---
 
 <h2
-  class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center"
+  class=`text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none ${classes ?? ''}`
 >
   {text}
 </h2>

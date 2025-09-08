@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import screenshot from '../../assets/images/v2-screenshot-local-first-interoperability.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
+import BulletList from '../../components/typography/BulletList.astro';
+---
+
+<div class="flex flex-col lg:flex-row gap-10">
+  <div class="w-full lg:w-1/2 flex flex-col gap-4 justify-center">
+    <SectionHeading text="Local-First, Privacy by Design" />
+    <!-- Image position is different depending on viewport width -->
+    <div class="block lg:hidden w-full lg:w-1/2 flex justify-center">
+      <Image
+        src={screenshot}
+        alt="v2 screenshot showing version control capabilities"
+        class="drop-shadow-xl/25"
+      />
+    </div>
+    <p class={textClasses}>
+      Files live in your filesystem — private by default.
+    </p>
+    <BulletList>
+      <li class={textClasses}>Share only when you choose</li>
+      <li class={textClasses}>Open formats like Markdown & HTML</li>
+      <li class={textClasses}>Your work outlasts any tool, including ours</li>
+    </BulletList>
+  </div>
+  <!-- Image position is different depending on viewport width -->
+  <div class="hidden lg:block w-full lg:w-1/2 flex justify-center">
+    <Image
+      src={screenshot}
+      alt="v2 screenshot showing version control capabilities"
+      class="drop-shadow-xl/25"
+    />
+  </div>
+</div>

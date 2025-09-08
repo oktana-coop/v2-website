@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import screenshot from '../../assets/images/v2-screenshot-rich-text.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
+import BulletList from '../../components/typography/BulletList.astro';
+---
+
+<div class="flex flex-col lg:flex-row gap-10">
+  <div class="w-full lg:w-1/2 flex flex-col gap-4 justify-center">
+    <SectionHeading text="Content over Formatting" />
+    <div class="block lg:hidden w-full lg:w-1/2 flex justify-center">
+      <Image
+        src={screenshot}
+        alt="v2 screenshot showing version control capabilities"
+        class="drop-shadow-xl/25"
+      />
+    </div>
+    <p class={textClasses}>
+      Convey richer semantics and add meaningful structure to your documents.
+    </p>
+    <BulletList>
+      <li class={textClasses}>
+        Semantic blocks for quotes, code, headings, and more
+      </li>
+      <li class={textClasses}>Calm, distraction-free environment</li>
+      <li class={textClasses}>Designed to help you think and refine</li>
+    </BulletList>
+  </div>
+  <div class="hidden lg:block w-full lg:w-1/2 flex justify-center">
+    <Image
+      src={screenshot}
+      alt="v2 screenshot showing version control capabilities"
+      class="drop-shadow-xl/25"
+    />
+  </div>
+</div>
