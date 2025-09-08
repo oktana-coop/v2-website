@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 
 import Button from '../../components/actions/buttons/Button.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
 ---
 
 <div class="flex flex-auto flex-col gap-12 sm:gap-18">
@@ -15,9 +16,7 @@ import v2Screenshot from '../../assets/images/v2-screenshot.png';
           id="typewriter-cursor"></span>
       </h1>
 
-      <p
-        class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center m-0 font-light"
-      >
+      <p class={textClasses}>
         A local-first editor with Git-style version control, true privacy, and
         complete control over your data
       </p>

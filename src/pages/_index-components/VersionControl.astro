@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import screenshot from '../../assets/images/v2-screenshot-versioning.png';
+import { textClasses } from '../../components/typography/textStyles.ts';
+---
+
+<div class="flex flex-col gap-10">
+  <div class="flex flex-col items-center gap-4">
+    <SectionHeading text="Version Control" />
+    <p class={`max-w-xl ${textClasses}`}>
+      Branch, experiment, and revert without fear. See how your document evolves
+      with clear diff views and full history.
+    </p>
+  </div>
+  <div class="flex justify-center">
+    <Image
+      src={screenshot}
+      alt="v2 screenshot showing version control capabilities"
+      class="drop-shadow-xl/25"
+    />
+  </div>
+</div>
