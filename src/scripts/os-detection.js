@@ -1,3 +1,5 @@
+import { latestVersion } from '../constants/app-version';
+
 // OS Detection and Download Button Update
 function initOSDetection() {
   // https://stackoverflow.com/a/38241481
@@ -32,17 +34,18 @@ function initOSDetection() {
   switch (os) {
     case 'Windows':
       downloadBtn.textContent = 'Download for Windows';
-      downloadBtn.href = '#';
+      downloadBtn.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
       downloadBtn.textContent = 'Download for Linux';
+      downloadBtn.href`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
       downloadBtn.textContent = 'Download for macOS';
-      downloadBtn.href = '#';
+      downloadBtn.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
       break;
   }
 }

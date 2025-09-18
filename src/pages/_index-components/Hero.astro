@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
+import { latestVersion } from '../../constants/app-version';
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
@@ -24,7 +25,8 @@ import { textClasses } from '../../components/typography/textStyles.ts';
     </div>
 
     <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
-      <a href=`#`
+      <a
+        href=`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`
         ><SolidButton
           text="Download for macOS"
           size="lg"
