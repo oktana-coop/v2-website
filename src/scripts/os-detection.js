@@ -34,18 +34,18 @@ function initOSDetection() {
 
   switch (os) {
     case 'Windows':
-      downloadBtn.textContent = 'Download for Windows';
+      downloadBtn.textContent = 'Download for Windows (Early Access)';
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
-      downloadBtn.textContent = 'Download for Linux';
+      downloadBtn.textContent = 'Download for Linux (Early Access)';
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
-      downloadBtn.textContent = 'Download for macOS';
+      downloadBtn.textContent = 'Download for macOS (Early Access)';
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
       break;
   }
