@@ -27,25 +27,26 @@ function initOSDetection() {
     return os;
   }
 
-  // Update the button immediately
+  const downloadBtnLink = document.getElementById('download-btn-link');
   const downloadBtn = document.getElementById('download-btn');
+
   const os = detectOS();
 
   switch (os) {
     case 'Windows':
       downloadBtn.textContent = 'Download for Windows';
-      downloadBtn.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
+      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
       downloadBtn.textContent = 'Download for Linux';
-      downloadBtn.href`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
+      downloadBtnLink.href`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
       downloadBtn.textContent = 'Download for macOS';
-      downloadBtn.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
+      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
       break;
   }
 }
