@@ -40,7 +40,7 @@ function initOSDetection() {
     case 'Linux':
     case 'Android':
       downloadBtn.textContent = 'Download for Linux';
-      downloadBtnLink.href`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
+      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
