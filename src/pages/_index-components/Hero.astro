@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 
 import { latestVersion } from '../../constants/app-version';
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
@@ -28,7 +29,9 @@ import { textClasses } from '../../components/typography/textStyles.ts';
       <a
         href=`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`
         id="download-btn-link"
-        ><SolidButton
+      >
+        <SolidButton
+          icon="fa-apple"
           text="Download for macOS (Early Access)"
           size="lg"
           id="download-btn"

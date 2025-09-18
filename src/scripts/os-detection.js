@@ -1,5 +1,9 @@
 import { latestVersion } from '../constants/app-version';
 
+import AppleIcon from '../assets/icons/fa-apple.svg?raw';
+import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
+import LinuxIcon from '../assets/icons/fa-linux.svg?raw';
+
 // OS Detection and Download Button Update
 function initOSDetection() {
   // https://stackoverflow.com/a/38241481
@@ -28,24 +32,28 @@ function initOSDetection() {
   }
 
   const downloadBtnLink = document.getElementById('download-btn-link');
-  const downloadBtn = document.getElementById('download-btn');
+  const downloadBtnText = document.getElementById('download-btn-text');
+  const downloadBtnIcon = document.getElementById('download-btn-icon');
 
   const os = detectOS();
 
   switch (os) {
     case 'Windows':
-      downloadBtn.textContent = 'Download for Windows (Early Access)';
+      downloadBtnText.textContent = 'Download for Windows (Early Access)';
+      downloadBtnIcon.innerHTML = WindowsIcon;
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
-      downloadBtn.textContent = 'Download for Linux (Early Access)';
+      downloadBtnText.textContent = 'Download for Linux (Early Access)';
+      downloadBtnIcon.innerHTML = LinuxIcon;
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
-      downloadBtn.textContent = 'Download for macOS (Early Access)';
+      downloadBtnText.textContent = 'Download for macOS (Early Access)';
+      // downloadBtnIcon.innerHTML = AppleIcon;
       downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
       break;
   }
