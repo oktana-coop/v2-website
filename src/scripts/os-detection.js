@@ -1,11 +1,9 @@
-import { latestVersion } from '../constants/app-version';
-
-import AppleIcon from '../assets/icons/fa-apple.svg?raw';
-import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
-import LinuxIcon from '../assets/icons/fa-linux.svg?raw';
-
 // OS Detection and Download Button Update
 function initOSDetection() {
+  // Current version info
+  const CURRENT_VERSION = '0.3.48';
+  const BASE_URL = `https://github.com/oktana-coop/v2/releases/download/v${CURRENT_VERSION}`;
+
   // https://stackoverflow.com/a/38241481
   function detectOS() {
     const userAgent = window.navigator.userAgent,
@@ -31,30 +29,25 @@ function initOSDetection() {
     return os;
   }
 
-  const downloadBtnLink = document.getElementById('download-btn-link');
-  const downloadBtnText = document.getElementById('download-btn-text');
-  const downloadBtnIcon = document.getElementById('download-btn-icon');
-
+  // Update the button immediately
+  const downloadBtn = document.getElementById('download-btn');
   const os = detectOS();
 
   switch (os) {
     case 'Windows':
-      downloadBtnText.textContent = 'Download for Windows (Early Access)';
-      downloadBtnIcon.innerHTML = WindowsIcon;
-      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
+      downloadBtn.textContent = 'Download for Windows';
+      downloadBtn.href = `${BASE_URL}/v2.Setup.${CURRENT_VERSION}.exe`;
       break;
     case 'Linux':
     case 'Android':
-      downloadBtnText.textContent = 'Download for Linux (Early Access)';
-      downloadBtnIcon.innerHTML = LinuxIcon;
-      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}.AppImage`;
+      downloadBtn.textContent = 'Download for Linux';
+      downloadBtn.href = `${BASE_URL}/v2-${CURRENT_VERSION}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
-      downloadBtnText.textContent = 'Download for macOS (Early Access)';
-      // downloadBtnIcon.innerHTML = AppleIcon;
-      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`;
+      downloadBtn.textContent = 'Download for macOS';
+      downloadBtn.href = `${BASE_URL}/v2-${CURRENT_VERSION}-universal.dmg`;
       break;
   }
 }
