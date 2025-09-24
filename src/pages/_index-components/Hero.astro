@@ -2,11 +2,13 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
-import { latestVersion } from '../../constants/app-version';
+import { getLatestVersion } from '../../lib/github';
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
 import { textClasses } from '../../components/typography/textStyles.ts';
+
+const latestVersion = await getLatestVersion();
 ---
 
 <div class="flex flex-auto flex-col gap-12 sm:gap-18">
@@ -33,7 +35,7 @@ import { textClasses } from '../../components/typography/textStyles.ts';
         >
           <SolidButton
             icon="fa-apple"
-            text="Download for macOS (Early Access)"
+            text="Download for macOS"
             size="lg"
             id="download-btn"
             classes="w-full sm:w-auto"

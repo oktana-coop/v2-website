@@ -1,8 +1,10 @@
-// OS Detection and Download Button Update
-function initOSDetection() {
-  // Current version info
-  const CURRENT_VERSION = '0.3.48';
-  const BASE_URL = `https://github.com/oktana-coop/v2/releases/download/v${CURRENT_VERSION}`;
+import AppleIcon from '../assets/icons/fa-apple.svg?raw';
+import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
+import { getLatestVersion } from '../lib/github';
+
+async function initOSDetection() {
+  const latestVersion = await getLatestVersion();
+  const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
 
   // https://stackoverflow.com/a/38241481
   function detectOS() {
@@ -29,28 +31,42 @@ function initOSDetection() {
     return os;
   }
 
-  // Update the button immediately
-  const downloadBtn = document.getElementById('download-btn');
+  const downloadBtnLink = document.getElementById('download-btn-link');
+  const downloadBtnText = document.getElementById('download-btn-text');
+  const downloadBtnIcon = document.getElementById('download-btn-icon');
+
+  // Check if elements exist (they might not exist on all pages)
+  if (!downloadBtnLink || !downloadBtnText || !downloadBtnIcon) {
+    return;
+  }
+
   const os = detectOS();
 
   switch (os) {
     case 'Windows':
-      downloadBtn.textContent = 'Download for Windows';
-      downloadBtn.href = `${BASE_URL}/v2.Setup.${CURRENT_VERSION}.exe`;
+      downloadBtnText.textContent = 'Download for Windows';
+      downloadBtnIcon.innerHTML = WindowsIcon;
+      downloadBtnLink.href = `${baseUrl}/v2.Setup.${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
-      downloadBtn.textContent = 'Download for Linux';
-      downloadBtn.href = `${BASE_URL}/v2-${CURRENT_VERSION}.AppImage`;
+      downloadBtnText.textContent = 'Download for Linux';
+      downloadBtnIcon.style.display = 'none';
+      downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}.AppImage`;
       break;
     case 'Mac OS':
     case 'iOS':
     default:
-      downloadBtn.textContent = 'Download for macOS';
-      downloadBtn.href = `${BASE_URL}/v2-${CURRENT_VERSION}-universal.dmg`;
+      downloadBtnText.textContent = 'Download for macOS';
+      downloadBtnIcon.innerHTML = AppleIcon;
+      downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}-universal.dmg`;
       break;
   }
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initOSDetection);
+document.addEventListener('DOMContentLoaded', () => {
+  initOSDetection().catch((error) => {
+    console.error('Failed to initialize OS detection:', error);
+  });
+});

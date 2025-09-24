@@ -3,38 +3,39 @@ import Layout from '../layouts/Layout.astro';
 import MainContainer from '../components/MainContainer.astro';
 import NavigationBar from '../components/navigation/NavigationBar.astro';
 import Footer from '../components/Footer.astro';
+import { getLatestVersion } from '../lib/github';
 import { Icon } from 'astro-icon/components';
 
-const CURRENT_VERSION = "0.3.48";
-const BASE_URL = `https://github.com/oktana-coop/v2/releases/download/v${CURRENT_VERSION}`;
+const latestVersion = await getLatestVersion();
+const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
 
 const downloads = [
   {
     category: "macOS",
     icon: "fa-apple",
     items: [
-      { name: "Universal", file: `v2-${CURRENT_VERSION}-universal.dmg`, recommended: true },
-      { name: "Intel", file: `v2-${CURRENT_VERSION}.dmg` },
-      { name: "Apple Silicon", file: `v2-${CURRENT_VERSION}-arm64.dmg` }
+      { name: "Universal", file: `v2-${latestVersion}-universal.dmg`, recommended: true },
+      { name: "Intel", file: `v2-${latestVersion}.dmg` },
+      { name: "Apple Silicon", file: `v2-${latestVersion}-arm64.dmg` }
     ]
   },
   {
     category: "Windows", 
     icon: "fa-windows",
     items: [
-      { name: "Installer", file: `v2.Setup.${CURRENT_VERSION}.exe` }
+      { name: "Installer", file: `v2.Setup.${latestVersion}.exe` }
     ]
   },
   {
     category: "Linux",
     icon: "fa-linux", 
     items: [
-      { name: "AppImage", file: `v2-${CURRENT_VERSION}.AppImage`, recommended: true },
-      { name: "AppImage (ARM64)", file: `v2-${CURRENT_VERSION}-arm64.AppImage` },
-      { name: "Deb", file: `v2_${CURRENT_VERSION}_amd64.deb` },
-      { name: "Deb (ARM64)", file: `v2_${CURRENT_VERSION}_arm64.deb` },
-      { name: "RPM", file: `v2-${CURRENT_VERSION}.x86_64.rpm` },
-      { name: "RPM (ARM64)", file: `v2-${CURRENT_VERSION}.aarch64.rpm` }
+      { name: "AppImage", file: `v2-${latestVersion}.AppImage`, recommended: true },
+      { name: "AppImage (ARM64)", file: `v2-${latestVersion}-arm64.AppImage` },
+      { name: "Deb", file: `v2_${latestVersion}_amd64.deb` },
+      { name: "Deb (ARM64)", file: `v2_${latestVersion}_arm64.deb` },
+      { name: "RPM", file: `v2-${latestVersion}.x86_64.rpm` },
+      { name: "RPM (ARM64)", file: `v2-${latestVersion}.aarch64.rpm` }
     ]
   }
 ];
@@ -47,7 +48,7 @@ const downloads = [
       
       <div class="text-center mb-8">
         <h1 class="text-3xl font-semibold mb-2">Download V2</h1>
-        <p class="text-gray-500 text-sm">v{CURRENT_VERSION}</p>
+        <p class="text-gray-500 text-sm">v{latestVersion}</p>
       </div>
 
       <div class="space-y-8">
@@ -59,9 +60,9 @@ const downloads = [
             </h2>
             <div class="space-y-1">
               {platform.items.map(item => (
-                <div class="flex items-center gap-3 py-1.5 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                <div class="flex items-center gap-3 py-1.5 px-3 hover:bg-purple-50 rounded-md transition-colors">
                   <a 
-                    href={`${BASE_URL}/${item.file}`} 
+                    href={`${baseUrl}/${item.file}`} 
                     class="text-purple-500 hover:text-purple-600 font-medium transition-colors"
                   >
                     {item.name}
