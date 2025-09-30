@@ -41,7 +41,7 @@ function initOSDetection() {
     case 'Windows':
       downloadBtnText.textContent = 'Download for Windows (Early Access)';
       downloadBtnIcon.innerHTML = WindowsIcon;
-      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2.Setup.${latestVersion}.exe`;
+      downloadBtnLink.href = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-Setup-${latestVersion}.exe`;
       break;
     case 'Linux':
     case 'Android':
