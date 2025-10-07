@@ -2,13 +2,16 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
-import { getLatestVersion } from '../../lib/github';
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
 import { textClasses } from '../../components/typography/textStyles.ts';
 
-const latestVersion = await getLatestVersion();
+interface Props {
+  latestVersion: string;
+}
+
+const { latestVersion } = Astro.props;
 ---
 
 <div class="flex flex-auto flex-col gap-12 sm:gap-18">

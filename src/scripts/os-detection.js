@@ -1,9 +1,15 @@
 import AppleIcon from '../assets/icons/fa-apple.svg?raw';
 import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
-import { getLatestVersion } from '../lib/github';
 
-async function initOSDetection() {
-  const latestVersion = await getLatestVersion();
+function initOSDetection() {
+  // Get version from data attribute set at build time
+  const versionElement = document.querySelector('[data-v2-version]');
+  if (!versionElement) {
+    console.error('Version data not found');
+    return;
+  }
+
+  const latestVersion = versionElement.dataset.v2Version;
   const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
 
   // https://stackoverflow.com/a/38241481
@@ -66,7 +72,5 @@ async function initOSDetection() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  initOSDetection().catch((error) => {
-    console.error('Failed to initialize OS detection:', error);
-  });
+  initOSDetection();
 });

@@ -1,8 +1,15 @@
 // Fetch latest version from GitHub releases API
 export async function getLatestVersion(): Promise<string> {
   try {
+    // Use GitHub token if available for higher rate limits
+    const headers: Record<string, string> = {};
+    if (import.meta.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `Bearer ${import.meta.env.GITHUB_TOKEN}`;
+    }
+
     const response = await fetch(
-      'https://api.github.com/repos/oktana-coop/v2/releases/latest'
+      'https://api.github.com/repos/oktana-coop/v2/releases/latest',
+      { headers }
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

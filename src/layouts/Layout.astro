@@ -1,4 +1,6 @@
 ---
+import { getLatestVersion } from '../lib/github';
+
 interface Props {
   title: string;
   description?: string;
@@ -10,6 +12,8 @@ const {
   description = 'Edit fearlessly, collaborate asynchronously. v2 is a local-first rich-text editor with Git-style version control, true privacy, and complete control over your data',
   image = 'https://v2editor.com/v2-1200x630.png',
 } = Astro.props;
+
+const latestVersion = await getLatestVersion();
 ---
 
 <!doctype html>
@@ -48,7 +52,7 @@ const {
 
     <script src="../scripts/os-detection.js"></script>
   </head>
-  <body>
+  <body data-v2-version={latestVersion}>
     <slot />
   </body>
 </html>
