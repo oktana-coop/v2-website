@@ -24,9 +24,9 @@
   "lint-staged": {
     "{src/**/*,public/**/*,astro.config.mjs,package.json,tsconfig.json}": [
       "npm run build",
-      "touch docs/.nojekyll",
-      "echo 'www.v2editor.com' > docs/CNAME",
-      "git add docs/"
+      "touch dist/.nojekyll",
+      "echo 'www.v2editor.com' > dist/CNAME",
+      "git add dist/"
     ]
   }
 }
