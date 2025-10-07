@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [feats-downloads-page]
-  workflow_dispatch:
+    branches: [feat-downloads-page]
 
 permissions:
   contents: read
