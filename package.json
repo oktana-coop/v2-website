@@ -18,15 +18,6 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2"
-  },
-  "lint-staged": {
-    "{src/**/*,public/**/*,astro.config.mjs,package.json,tsconfig.json}": [
-      "npm run build",
-      "touch dist/.nojekyll",
-      "echo 'www.v2editor.com' > dist/CNAME",
-      "git add dist/"
-    ]
   }
 }

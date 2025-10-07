@@ -3,15 +3,9 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
-import SolidButton from '../../components/actions/buttons/SolidButton.astro';
+import OSDetectionButton from '../../components/OSDetectionButton.astro';
 import v2Screenshot from '../../assets/images/v2-screenshot.png';
 import { textClasses } from '../../components/typography/textStyles.ts';
-
-interface Props {
-  latestVersion: string;
-}
-
-const { latestVersion } = Astro.props;
 ---
 
 <div class="flex flex-auto flex-col gap-12 sm:gap-18">
@@ -32,18 +26,7 @@ const { latestVersion } = Astro.props;
 
     <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
       <div class="flex flex-col items-center gap-2">
-        <a
-          href=`https://github.com/oktana-coop/v2/releases/download/v${latestVersion}/v2-${latestVersion}-universal.dmg`
-          id="download-btn-link"
-        >
-          <SolidButton
-            icon="fa-apple"
-            text="Download for macOS"
-            size="lg"
-            id="download-btn"
-            classes="w-full sm:w-auto"
-          /></a
-        >
+        <OSDetectionButton />
         <p class="text-sm text-gray-500">
           <a href="/downloads" class="text-purple-500 hover:text-purple-600">
             More platforms

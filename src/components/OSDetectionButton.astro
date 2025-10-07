@@ -1,0 +1,94 @@
+---
+import SolidButton from './actions/buttons/SolidButton.astro';
+---
+
+<div id="os-detection-container">
+  <!-- Default button (will be replaced by client-side script) -->
+  <a href="https://github.com/oktana-coop/v2/releases/latest" id="download-btn-link">
+    <SolidButton
+      icon="fa-apple"
+      text="Download for macOS"
+      size="lg"
+      id="download-btn"
+      classes="w-full sm:w-auto"
+    />
+  </a>
+</div>
+
+<script>
+  import AppleIcon from '../assets/icons/fa-apple.svg?raw';
+  import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
+
+  async function initOSDetection() {
+    try {
+      function detectOS() {
+        const userAgent = window.navigator.userAgent;
+        const platform = (window.navigator as any)?.userAgentData?.platform || window.navigator.platform;
+        const macosPlatforms = ['macOS', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+        const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+        const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+          return 'Mac OS';
+        } else if (iosPlatforms.indexOf(platform) !== -1) {
+          return 'iOS';
+        } else if (windowsPlatforms.indexOf(platform) !== -1) {
+          return 'Windows';
+        } else if (/Android/.test(userAgent)) {
+          return 'Android';
+        } else if (/Linux/.test(platform)) {
+          return 'Linux';
+        }
+        return 'Mac OS'; // Default fallback
+      }
+
+      const detectedOS = detectOS();
+
+      // Fetch latest version from GitHub API
+      const response = await fetch('https://api.github.com/repos/oktana-coop/v2/releases/latest');
+      if (!response.ok) {
+        console.warn('Could not fetch latest version, using fallback');
+        return; // Keep default links
+      }
+      
+      const data = await response.json();
+      const latestVersion = data.tag_name.replace(/^v/, '');
+      const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
+
+      // Update button based on detected OS
+      const downloadBtnLink = document.getElementById('download-btn-link') as HTMLAnchorElement;
+      const downloadBtnText = document.getElementById('download-btn-text') as HTMLElement;
+      const downloadBtnIcon = document.getElementById('download-btn-icon') as HTMLElement;
+
+      if (!downloadBtnLink || !downloadBtnText || !downloadBtnIcon) {
+        return; // Elements not found
+      }
+
+      switch (detectedOS) {
+        case 'Windows':
+          downloadBtnText.textContent = 'Download for Windows';
+          downloadBtnIcon.innerHTML = WindowsIcon;
+          downloadBtnLink.href = `${baseUrl}/v2.Setup.${latestVersion}.exe`;
+          break;
+        case 'Linux':
+        case 'Android':
+          downloadBtnText.textContent = 'Download for Linux';
+          downloadBtnIcon.style.display = 'none';
+          downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}.AppImage`;
+          break;
+        case 'Mac OS':
+        case 'iOS':
+        default:
+          downloadBtnText.textContent = 'Download for macOS';
+          downloadBtnIcon.innerHTML = AppleIcon;
+          downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}-universal.dmg`;
+          break;
+      }
+    } catch (error) {
+      console.warn('OS detection failed:', error);
+      // Keep default button as fallback
+    }
+  }
+
+  initOSDetection();
+</script>
