@@ -2,7 +2,7 @@
 import SolidButton from './actions/buttons/SolidButton.astro';
 ---
 
-<div id="os-detection-container">
+<div id="os-detection-container" class="w-full">
   <!-- Default button (will be replaced by client-side script) -->
   <a href="https://github.com/oktana-coop/v2/releases/latest" id="download-btn-link">
     <SolidButton
@@ -68,7 +68,7 @@ import SolidButton from './actions/buttons/SolidButton.astro';
         case 'Windows':
           downloadBtnText.textContent = 'Download for Windows';
           downloadBtnIcon.innerHTML = WindowsIcon;
-          downloadBtnLink.href = `${baseUrl}/v2.Setup.${latestVersion}.exe`;
+          downloadBtnLink.href = `${baseUrl}/v2-Setup-${latestVersion}.exe`;
           break;
         case 'Linux':
         case 'Android':

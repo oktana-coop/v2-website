@@ -1,4 +1,5 @@
-// Fetch latest version from GitHub releases API
+const DEFAULT_VERSION = '0.6.4';
+
 export async function getLatestVersion(): Promise<string> {
   try {
     // Use GitHub token if available for higher rate limits
@@ -18,6 +19,6 @@ export async function getLatestVersion(): Promise<string> {
     return data.tag_name.replace(/^v/, '');
   } catch (error) {
     console.error('Failed to fetch latest version from GitHub:', error);
-    return '0.5.0';
+    return DEFAULT_VERSION;
   }
 }
