@@ -1,0 +1,26 @@
+---
+interface Props {
+  name: string;
+  file: string;
+  version: string;
+  baseUrl: string;
+  recommended?: boolean;
+}
+
+const { name, file, version, baseUrl, recommended } = Astro.props;
+---
+
+<div class="flex items-center gap-3 py-1.5 px-3 hover:bg-purple-50 rounded-md transition-colors">
+  <a 
+    href={`${baseUrl}/v${version}/${file}`} 
+    class="text-purple-500 hover:text-purple-600 font-medium transition-colors download-link"
+    data-file={file}
+  >
+    {name}
+  </a>
+  {recommended && (
+    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">
+      Recommended
+    </span>
+  )}
+</div>

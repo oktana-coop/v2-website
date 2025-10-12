@@ -15,10 +15,29 @@ These are the basic commands used for development:
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
-### Pages and Routing
+### Environment Variables
 
-Astro is opinionated in how you add routes, so it's good to familiarize with [file-based routing](https://docs.astro.build/en/guides/routing/) if you want to add a new page.
+For local development, create a `.env` file in the root directory:
+
+```bash
+# GitHub Personal Access Token (for higher API rate limits)
+GITHUB_TOKEN=your_github_token_here
+```
+
+**Getting a GitHub Token:**
+
+1. Go to [GitHub Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
+2. Generate new token (classic)
+3. No special permissions needed for public repo releases
+4. Copy the token and add it to your `.env` file
 
 ## Deployment
 
-The website is currently deployed to [GitHub Pages](https://docs.github.com/en/pages) using the relevant GitHub action. Every time you push to the `main` branch, a fresh Netlify deployment is triggered.
+### GitHub Pages (Recommended)
+
+The website is deployed to [GitHub Pages](https://docs.github.com/en/pages) using GitHub Actions.
+
+**Setup:**
+
+1. The workflow in `.github/workflows/deploy.yml` automatically uses GitHub's built-in token
+2. Push to `main` branch triggers automatic deployment
