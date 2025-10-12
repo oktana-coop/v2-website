@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [feat-downloads-page]
+    branches: [main]
 
 permissions:
   contents: read
