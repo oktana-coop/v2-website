@@ -15,9 +15,11 @@
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.13.5",
     "astro-icon": "^1.1.5",
+    "pg": "^8.16.3",
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
+    "@types/pg": "^8.15.6",
     "husky": "^9.1.7",
     "prettier": "^3.6.2"
   }
