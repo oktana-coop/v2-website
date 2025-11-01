@@ -45,7 +45,6 @@ const {
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-
   </head>
   <body>
     <slot />
@@ -70,6 +69,8 @@ const {
     --color-purple-900: #53169c;
     --color-purple-950: #340b6a;
   }
+
+  @custom-variant dark (&:where(.dark, .dark *));
 
   html {
     font-family: 'Noto Sans', sans-serif;
