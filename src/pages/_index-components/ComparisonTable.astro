@@ -1,0 +1,352 @@
+---
+import { Image } from 'astro:assets';
+
+import v2Logo from '../../assets/images/v2-logo-light.svg';
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+import { textClasses } from '../../components/typography/textStyles.ts';
+
+const comparisonOptions = [
+  {
+    name: 'Plaintext Markdown Editors',
+  },
+  {
+    name: 'v2',
+    logo: v2Logo,
+  },
+  {
+    name: 'Cloud-Based Editors',
+  },
+  {
+    name: 'Traditional Word Processors',
+  },
+];
+
+const versioning = {
+  name: 'Versioning',
+  features: [
+    {
+      name: 'Save Version History',
+      capabilities: [
+        {
+          details: 'External tooling needed (e.g. Git)',
+        },
+        {
+          details: '✔️ Built-in',
+        },
+        {
+          details: '✔️',
+        },
+        {
+          details: '✔️',
+        },
+      ],
+    },
+    {
+      name: 'Go Back to Previous Versions',
+      capabilities: [
+        {
+          details: 'External tooling needed (e.g. Git)',
+        },
+        {
+          details: '✔️ Built-in',
+        },
+        {
+          details: '✔️',
+        },
+        {
+          details: '✔️',
+        },
+      ],
+    },
+    {
+      name: 'Compare Versions',
+      capabilities: [
+        {
+          details: 'Git only; plaintext diff',
+        },
+        {
+          details: '✔️ Formatting-aware diffing',
+        },
+        {
+          details: 'Limited',
+        },
+        {
+          details: 'Limited: Track Changes',
+        },
+      ],
+    },
+    {
+      name: 'Create Alternate Versions (Branching)',
+      capabilities: [
+        {
+          details: 'External tooling needed (e.g. Git)',
+        },
+        {
+          details: '✔️ Built-in',
+        },
+        {
+          details: '✖️',
+        },
+        {
+          details: '✖️',
+        },
+      ],
+    },
+  ],
+};
+
+const collaboration = {
+  name: 'Collaboration',
+  features: [
+    {
+      name: 'Async Collaboration',
+      capabilities: [
+        {
+          details: 'Git/GitHub setup required',
+        },
+        {
+          details:
+            '⚡ Coming Soon: Sophisticated review workflows (GitHub-like)',
+        },
+        {
+          details: 'Limited: comments + shared drives',
+        },
+        {
+          details: 'Limited: comments + email',
+        },
+      ],
+    },
+    {
+      name: 'Real-Time Collaboration',
+      capabilities: [
+        {
+          details: '✖️',
+        },
+        {
+          details: '⚡ Coming Soon: optional, on-demand, no servers',
+        },
+        {
+          details: '☁️ Always-on; distracting, constant presence',
+        },
+        {
+          details: 'Requires pairing with cloud services',
+        },
+      ],
+    },
+  ],
+};
+
+const interoperability = {
+  name: 'Interoperability',
+  features: [
+    {
+      name: 'Portable Files',
+      capabilities: [
+        {
+          details: '✔️ Markdown',
+        },
+        {
+          details: '✔️ Markdown + Git folder',
+        },
+        {
+          details: '✖️ Proprietary, vendor lock-in',
+        },
+        {
+          details: 'DOCX-centric, semantic loss',
+        },
+      ],
+    },
+    {
+      name: 'Export to Other Formats',
+      capabilities: [
+        {
+          details: 'Limited: DOCX, PDF',
+        },
+        {
+          details: '✔️ Pandoc: DOCX, HTML, Markdown, LaTeX, more',
+        },
+        {
+          details: 'Limited: DOCX, PDF',
+        },
+        {
+          details: 'Limited: DOCX, PDF',
+        },
+      ],
+    },
+  ],
+};
+
+const privacyAndOwnership = {
+  name: 'Privacy & Ownership',
+  features: [
+    {
+      name: 'Who Owns the Files',
+      capabilities: [
+        {
+          details: '🔒 You',
+        },
+        {
+          details: '🔒 You',
+        },
+        {
+          details: '☁️ Stored & processed on vendor servers',
+        },
+        {
+          details: '🔒 You',
+        },
+      ],
+    },
+    {
+      name: 'Cloud Sync Privacy',
+      capabilities: [
+        {
+          details: '☁️ Vendor-controlled, not private',
+        },
+        {
+          details: '⚡ Coming Soon: 🔒 Encrypted sync',
+        },
+        {
+          details: '☁️ Vendor-controlled, not private',
+        },
+        {
+          details: '☁️ Vendor-controlled, not private',
+        },
+      ],
+    },
+    {
+      name: 'Works Offline',
+      capabilities: [
+        {
+          details: '✔️ Fully offline',
+        },
+        {
+          details: '✔️ Fully offline',
+        },
+        {
+          details: 'Limited: often unreliable',
+        },
+        {
+          details: '✔️ Fully offline',
+        },
+      ],
+    },
+  ],
+};
+
+type ComparisonGroup = {
+  name: string;
+  features: Array<{
+    name: string;
+    capabilities: Array<{
+      details: string;
+    }>;
+  }>;
+};
+
+const comparisonGroups: Record<string, ComparisonGroup> = {
+  versioning,
+  collaboration,
+  interoperability,
+  privacyAndOwnership,
+};
+---
+
+<div class="flex flex-col gap-10">
+  <div class="flex flex-col items-center gap-4">
+    <SectionHeading text="How is v2 Different" classes="text-center" />
+    <p class={`text-center max-w-xl ${textClasses}`}>
+      v2 gives you the collaboration capabilities of cloud-based editors (<i
+        >and more</i
+      >) without sacrificing data ownership
+    </p>
+  </div>
+
+  <!-- Only display at screens wider than 1360px -->
+  <div class="isolate hidden min-[1360px]:block">
+    <div class="relative -mx-8">
+      <div class="absolute inset-x-4 inset-y-0 -z-10 flex">
+        <div
+          style="margin-left: 40%"
+          aria-hidden="true"
+          class="flex w-1/5 px-4"
+        >
+          <div
+            class="w-full rounded-t-xl border-x border-t border-gray-900/10 bg-gray-400/5"
+          >
+          </div>
+        </div>
+      </div>
+      <table class="w-full table-fixed border-collapse text-left">
+        <caption class="sr-only">
+          Rich-text editing software feature comparison table
+        </caption>
+        <colgroup>
+          <col class="w-1/5" />
+          <col class="w-1/5" />
+          <col class="w-1/5" />
+          <col class="w-1/5" />
+          <col class="w-1/5" />
+        </colgroup>
+        <thead>
+          <tr>
+            <td></td>
+            {
+              comparisonOptions.map((option) => (
+                <th scope="col" class="px-6 pt-6 xl:px-8 xl:pt-8">
+                  <div class="text-sm/7 text-center font-semibold text-gray-900">
+                    {option.logo ? (
+                      <Image
+                        src={v2Logo}
+                        alt={option.name}
+                        height="40"
+                        class="h-[40px] inline"
+                      />
+                    ) : (
+                      option.name
+                    )}
+                  </div>
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            Object.values(comparisonGroups).map((group) => (
+              <Fragment>
+                <tr class="border-b border-gray-900/5">
+                  <th
+                    scope="colgroup"
+                    colspan="4"
+                    class="pb-4 pt-8 text-sm/6 font-semibold text-gray-900"
+                  >
+                    {group.name}
+                  </th>
+                </tr>
+                {group.features.map(({ name, capabilities }) => (
+                  <tr class="border-b border-gray-900/5">
+                    <th
+                      scope="row"
+                      class="py-4 text-sm/6 font-normal text-gray-900"
+                    >
+                      {name}
+                    </th>
+                    {capabilities.map(({ details }) => (
+                      <td class="px-6 py-4 xl:px-8">
+                        <div class="flex items-center justify-center gap-2">
+                          <div class="text-center text-sm/6 text-gray-500">
+                            {details}
+                          </div>
+                        </div>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </Fragment>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
