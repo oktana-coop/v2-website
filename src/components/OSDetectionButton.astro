@@ -42,7 +42,21 @@ import SolidButton from './actions/buttons/SolidButton.astro';
         return 'Mac OS'; // Default fallback
       }
 
+      function detectArchitecture() {
+        const userAgent = window.navigator.userAgent;
+        const platform = (window.navigator as any)?.userAgentData?.platform || window.navigator.platform;
+
+        // Check for ARM architecture indicators
+        if (/arm|aarch64/i.test(userAgent) || /arm|aarch64/i.test(platform)) {
+          return 'arm64';
+        }
+
+        // Default to x86_64
+        return 'x86_64';
+      }
+
       const detectedOS = detectOS();
+      const detectedArch = detectArchitecture();
 
       // Fetch latest version from GitHub API
       const response = await fetch('https://api.github.com/repos/oktana-coop/v2/releases/latest');
@@ -74,7 +88,7 @@ import SolidButton from './actions/buttons/SolidButton.astro';
         case 'Android':
           downloadBtnText.textContent = 'Download for Linux';
           downloadBtnIcon.style.display = 'none';
-          downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}.AppImage`;
+          downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}-${detectedArch}.AppImage`;
           break;
         case 'Mac OS':
         case 'iOS':
