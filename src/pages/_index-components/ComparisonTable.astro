@@ -1,254 +1,211 @@
 ---
 import { Image } from 'astro:assets';
+import { type ImageMetadata } from 'astro';
 
 import v2Logo from '../../assets/images/v2-logo-light.svg';
 import SectionHeading from '../../components/typography/SectionHeading.astro';
 import { textClasses } from '../../components/typography/textStyles.ts';
 
-const comparisonOptions = [
-  {
-    name: 'Plaintext Markdown Editors',
-  },
-  {
-    name: 'v2',
-    logo: v2Logo,
-  },
-  {
-    name: 'Cloud-Based Editors',
-  },
-  {
-    name: 'Traditional Word Processors',
-  },
-];
+const VERSIONING = 'versioning' as const;
+const COLLABORATION = 'collaboration' as const;
+const INTEROPERABILITY = 'interoperability' as const;
+const PRIVACY_AND_OWNERSHIP = 'privacyAndOwnership' as const;
 
-const versioning = {
-  name: 'Versioning',
-  features: [
-    {
-      name: 'Save Version History',
-      capabilities: [
-        {
-          details: 'External tooling needed (e.g. Git)',
-        },
-        {
-          details: '✔️ Built-in',
-        },
-        {
-          details: '✔️',
-        },
-        {
-          details: '✔️',
-        },
-      ],
-    },
-    {
-      name: 'Go Back to Previous Versions',
-      capabilities: [
-        {
-          details: 'External tooling needed (e.g. Git)',
-        },
-        {
-          details: '✔️ Built-in',
-        },
-        {
-          details: '✔️',
-        },
-        {
-          details: '✔️',
-        },
-      ],
-    },
-    {
-      name: 'Compare Versions',
-      capabilities: [
-        {
-          details: 'Git only; plaintext diff',
-        },
-        {
-          details: '✔️ Formatting-aware diffing',
-        },
-        {
-          details: 'Limited',
-        },
-        {
-          details: 'Limited: Track Changes',
-        },
-      ],
-    },
-    {
-      name: 'Create Alternate Versions (Branching)',
-      capabilities: [
-        {
-          details: 'External tooling needed (e.g. Git)',
-        },
-        {
-          details: '✔️ Built-in',
-        },
-        {
-          details: '✖️',
-        },
-        {
-          details: '✖️',
-        },
-      ],
-    },
-  ],
-};
-
-const collaboration = {
-  name: 'Collaboration',
-  features: [
-    {
-      name: 'Async Collaboration',
-      capabilities: [
-        {
-          details: 'Git/GitHub setup required',
-        },
-        {
-          details:
-            '⚡ Coming Soon: Sophisticated review workflows (GitHub-like)',
-        },
-        {
-          details: 'Limited: comments + shared drives',
-        },
-        {
-          details: 'Limited: comments + email',
-        },
-      ],
-    },
-    {
-      name: 'Real-Time Collaboration',
-      capabilities: [
-        {
-          details: '✖️',
-        },
-        {
-          details: '⚡ Coming Soon: optional, on-demand, no servers',
-        },
-        {
-          details: '☁️ Always-on; distracting, constant presence',
-        },
-        {
-          details: 'Requires pairing with cloud services',
-        },
-      ],
-    },
-  ],
-};
-
-const interoperability = {
-  name: 'Interoperability',
-  features: [
-    {
-      name: 'Portable Files',
-      capabilities: [
-        {
-          details: '✔️ Markdown',
-        },
-        {
-          details: '✔️ Markdown + Git folder',
-        },
-        {
-          details: '✖️ Proprietary, vendor lock-in',
-        },
-        {
-          details: 'DOCX-centric, semantic loss',
-        },
-      ],
-    },
-    {
-      name: 'Export to Other Formats',
-      capabilities: [
-        {
-          details: 'Limited: DOCX, PDF',
-        },
-        {
-          details: '✔️ Pandoc: DOCX, HTML, Markdown, LaTeX, more',
-        },
-        {
-          details: 'Limited: DOCX, PDF',
-        },
-        {
-          details: 'Limited: DOCX, PDF',
-        },
-      ],
-    },
-  ],
-};
-
-const privacyAndOwnership = {
-  name: 'Privacy & Ownership',
-  features: [
-    {
-      name: 'Who Owns the Files',
-      capabilities: [
-        {
-          details: '🔒 You',
-        },
-        {
-          details: '🔒 You',
-        },
-        {
-          details: '☁️ Stored & processed on vendor servers',
-        },
-        {
-          details: '🔒 You',
-        },
-      ],
-    },
-    {
-      name: 'Cloud Sync Privacy',
-      capabilities: [
-        {
-          details: '☁️ Vendor-controlled, not private',
-        },
-        {
-          details: '⚡ Coming Soon: 🔒 Encrypted sync',
-        },
-        {
-          details: '☁️ Vendor-controlled, not private',
-        },
-        {
-          details: '☁️ Vendor-controlled, not private',
-        },
-      ],
-    },
-    {
-      name: 'Works Offline',
-      capabilities: [
-        {
-          details: '✔️ Fully offline',
-        },
-        {
-          details: '✔️ Fully offline',
-        },
-        {
-          details: 'Limited: often unreliable',
-        },
-        {
-          details: '✔️ Fully offline',
-        },
-      ],
-    },
-  ],
-};
-
-type ComparisonGroup = {
+type ComparisonDimensionCategory = {
+  key: string;
   name: string;
-  features: Array<{
-    name: string;
-    capabilities: Array<{
-      details: string;
-    }>;
-  }>;
+  dimensions: ComparisonDimension[];
 };
 
-const comparisonGroups: Record<string, ComparisonGroup> = {
+type ComparisonDimension = {
+  key: string;
+  name: string;
+};
+
+const versioning: ComparisonDimensionCategory = {
+  key: VERSIONING,
+  name: 'Versioning',
+  dimensions: [
+    { key: 'saveVersionHistory' as const, name: 'Save Version History' },
+    {
+      key: 'goBackToPreviousVersions' as const,
+      name: 'Go Back to Previous Versions',
+    },
+    { key: 'compareVersions' as const, name: 'Compare Versions' },
+    {
+      key: 'createAlternateVersions' as const,
+      name: 'Create Alternate Versions',
+    },
+  ],
+};
+
+const collaboration: ComparisonDimensionCategory = {
+  key: COLLABORATION,
+  name: 'Collaboration',
+  dimensions: [
+    { key: 'asyncCollaboration' as const, name: 'Asynchronous Collaboration' },
+    { key: 'realTimeCollaboration' as const, name: 'Real-Time Collaboration' },
+  ],
+};
+
+const interoperability: ComparisonDimensionCategory = {
+  key: INTEROPERABILITY,
+  name: 'Interoperability',
+  dimensions: [
+    { key: 'portableFiles' as const, name: 'Portable Files' },
+    { key: 'exportToOtherFormats' as const, name: 'Export to Other Formats' },
+  ],
+};
+
+const privacyAndOwnership: ComparisonDimensionCategory = {
+  key: PRIVACY_AND_OWNERSHIP,
+  name: 'Privacy & Ownership',
+  dimensions: [
+    { key: 'whoOwnsTheFiles' as const, name: 'Who Owns the Files' },
+    { key: 'cloudSyncPrivacy' as const, name: 'Cloud Sync Privacy' },
+    { key: 'worksOffline' as const, name: 'Works Offline' },
+  ],
+};
+
+const comparisonDimensionCategories: ComparisonDimensionCategory[] = [
   versioning,
   collaboration,
   interoperability,
   privacyAndOwnership,
+];
+
+type VersioningCapabilities = {
+  saveVersionHistory: string;
+  goBackToPreviousVersions: string;
+  compareVersions: string;
+  createAlternateVersions: string;
 };
+
+type CollaborationCapabilities = {
+  asyncCollaboration: string;
+  realTimeCollaboration: string;
+};
+
+type InteroperabilityCapabilities = {
+  portableFiles: string;
+  exportToOtherFormats: string;
+};
+
+type PrivacyAndOwnershipCapabilities = {
+  whoOwnsTheFiles: string;
+  cloudSyncPrivacy: string;
+  worksOffline: string;
+};
+
+type ProductCapabilities = {
+  name: string;
+  logo?: ImageMetadata;
+  [VERSIONING]: VersioningCapabilities;
+  [COLLABORATION]: CollaborationCapabilities;
+  [INTEROPERABILITY]: InteroperabilityCapabilities;
+  [PRIVACY_AND_OWNERSHIP]: PrivacyAndOwnershipCapabilities;
+};
+
+const plaintextMarkdown: ProductCapabilities = {
+  name: 'Plaintext Markdown Editors',
+  versioning: {
+    saveVersionHistory: 'External tooling needed (e.g. Git)',
+    goBackToPreviousVersions: 'External tooling needed (e.g. Git)',
+    compareVersions: 'Git only; plaintext diff',
+    createAlternateVersions: 'External tooling needed (e.g. Git)',
+  },
+  collaboration: {
+    asyncCollaboration: 'Git/GitHub setup required',
+    realTimeCollaboration: '✖️',
+  },
+  interoperability: {
+    portableFiles: '✔️ Markdown',
+    exportToOtherFormats: 'Limited: DOCX, PDF',
+  },
+  privacyAndOwnership: {
+    whoOwnsTheFiles: '🔒 You',
+    cloudSyncPrivacy: '☁️ Vendor-controlled, not private',
+    worksOffline: '✔️ Fully offline',
+  },
+};
+
+const v2: ProductCapabilities = {
+  name: 'v2',
+  logo: v2Logo,
+  versioning: {
+    saveVersionHistory: '✔️ Built-in',
+    goBackToPreviousVersions: '✔️ Built-in',
+    compareVersions: '✔️ Formatting-aware diffing',
+    createAlternateVersions: '✔️ Built-in',
+  },
+  collaboration: {
+    asyncCollaboration:
+      '⚡ Coming Soon: Sophisticated review workflows (GitHub-like)',
+    realTimeCollaboration: '⚡ Coming Soon: optional, on-demand, no servers',
+  },
+  interoperability: {
+    portableFiles: '✔️ Markdown + Git folder',
+    exportToOtherFormats: '✔️ Pandoc: DOCX, HTML, Markdown, LaTeX, more',
+  },
+  privacyAndOwnership: {
+    whoOwnsTheFiles: '🔒 You',
+    cloudSyncPrivacy: '⚡ Coming Soon: 🔒 Encrypted sync',
+    worksOffline: '✔️ Fully offline',
+  },
+};
+
+const cloudBasedEditors: ProductCapabilities = {
+  name: 'Cloud-Based Editors',
+  versioning: {
+    saveVersionHistory: '✔️',
+    goBackToPreviousVersions: '✔️',
+    compareVersions: 'Limited',
+    createAlternateVersions: '✖️',
+  },
+  collaboration: {
+    asyncCollaboration: 'Limited: comments + shared drives',
+    realTimeCollaboration: '☁️ Always-on; distracting, constant presence',
+  },
+  interoperability: {
+    portableFiles: '✖️ Proprietary, vendor lock-in',
+    exportToOtherFormats: 'Limited: DOCX, PDF',
+  },
+  privacyAndOwnership: {
+    whoOwnsTheFiles: '☁️ Stored & processed on vendor servers',
+    cloudSyncPrivacy: '☁️ Vendor-controlled, not private',
+    worksOffline: 'Limited: often unreliable',
+  },
+};
+
+const traditionalWordProcessors: ProductCapabilities = {
+  name: 'Traditional Word Processors',
+  versioning: {
+    saveVersionHistory: '✔️',
+    goBackToPreviousVersions: '✔️',
+    compareVersions: 'Limited: Track Changes',
+    createAlternateVersions: '✖️',
+  },
+  collaboration: {
+    asyncCollaboration: 'Limited: comments + email',
+    realTimeCollaboration: 'Requires pairing with cloud services',
+  },
+  interoperability: {
+    portableFiles: 'DOCX-centric, semantic loss',
+    exportToOtherFormats: 'Limited: DOCX, PDF',
+  },
+  privacyAndOwnership: {
+    whoOwnsTheFiles: '🔒 You',
+    cloudSyncPrivacy: '☁️ Vendor-controlled, not private',
+    worksOffline: '✔️ Fully offline',
+  },
+};
+
+const comparisonOptions: ProductCapabilities[] = [
+  plaintextMarkdown,
+  v2,
+  cloudBasedEditors,
+  traditionalWordProcessors,
+];
 ---
 
 <div class="flex flex-col gap-10">
@@ -312,38 +269,46 @@ const comparisonGroups: Record<string, ComparisonGroup> = {
         </thead>
         <tbody>
           {
-            Object.values(comparisonGroups).map((group) => (
-              <Fragment>
-                <tr class="border-b border-gray-900/5">
-                  <th
-                    scope="colgroup"
-                    colspan="4"
-                    class="pb-4 pt-8 text-sm/6 font-semibold text-gray-900"
-                  >
-                    {group.name}
-                  </th>
-                </tr>
-                {group.features.map(({ name, capabilities }) => (
+            comparisonDimensionCategories.map(
+              ({ key: categoryKey, name: categoryName, dimensions }) => (
+                <Fragment>
                   <tr class="border-b border-gray-900/5">
                     <th
-                      scope="row"
-                      class="py-4 text-sm/6 font-normal text-gray-900"
+                      scope="colgroup"
+                      colspan="4"
+                      class="pb-4 pt-8 text-sm/6 font-semibold text-gray-900"
                     >
-                      {name}
+                      {categoryName}
                     </th>
-                    {capabilities.map(({ details }) => (
-                      <td class="px-6 py-4 xl:px-8">
-                        <div class="flex items-center justify-center gap-2">
-                          <div class="text-center text-sm/6 text-gray-500">
-                            {details}
-                          </div>
-                        </div>
-                      </td>
-                    ))}
                   </tr>
-                ))}
-              </Fragment>
-            ))
+                  {dimensions.map(
+                    ({ key: dimensionKey, name: dimensionName }) => (
+                      <tr class="border-b border-gray-900/5">
+                        <th
+                          scope="row"
+                          class="py-4 text-sm/6 font-normal text-gray-900"
+                        >
+                          {dimensionName}
+                        </th>
+                        {comparisonOptions.map((option) => (
+                          <td class="px-6 py-4 xl:px-8">
+                            <div class="flex items-center justify-center gap-2">
+                              <div class="text-center text-sm/6 text-gray-500">
+                                {
+                                  // @ts-ignore
+                                  // TODO: type category and dimension keys properly
+                                  option[categoryKey][dimensionKey]
+                                }
+                              </div>
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                    )
+                  )}
+                </Fragment>
+              )
+            )
           }
         </tbody>
       </table>
