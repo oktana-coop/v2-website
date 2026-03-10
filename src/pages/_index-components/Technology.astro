@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
+import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import SectionHeading from '../../components/typography/SectionHeading.astro';
 import automergeLogo from '../../assets/images/automerge.png';
 import gitLogo from '../../assets/images/git.png';
@@ -65,5 +66,17 @@ const technologies = [
         </div>
       ))
     }
+  </div>
+  <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
+    <a
+      href="https://oktana.dev/blog/v2-technical-dive/"
+      target="_blank"
+      rel="noopener"
+      ><OutlineButton
+        text="Read our Technical Dive"
+        size="lg"
+        classes="w-full sm:w-auto"
+      /></a
+    >
   </div>
 </div>

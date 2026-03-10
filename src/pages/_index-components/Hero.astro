@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import OSDetectionButton from '../../components/OSDetectionButton.astro';
@@ -61,7 +60,8 @@ import { textClasses } from '../../components/typography/textStyles.ts';
   }
 
   @keyframes blink-caret {
-    from, to {
+    from,
+    to {
       opacity: 1;
     }
     50% {
