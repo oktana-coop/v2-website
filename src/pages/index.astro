@@ -22,7 +22,10 @@ import Technology from './_index-components/Technology.astro';
       <ContentOverFormatting />
       <Collaboration />
       <LocalFirst />
-      <ComparisonTable />
+      <!-- Only display at screens wider than 1360px -->
+      <div class="hidden min-[1360px]:block">
+        <ComparisonTable />
+      </div>
       <Technology />
     </div>
 
