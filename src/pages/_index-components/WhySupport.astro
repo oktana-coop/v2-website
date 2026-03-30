@@ -1,0 +1,80 @@
+---
+import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+
+const textClasses =
+  'text-sm/6 sm:text-base/7 md:text-lg/8 m-0 font-light text-left sm:text-justify';
+---
+
+<div id="why-support" class="flex flex-col gap-10">
+  <div class="flex flex-col gap-4 md:gap-8">
+    <SectionHeading text="Why Support" classes="text-center" />
+    <div class="flex flex-col gap-4">
+      <p class={textClasses}>
+        Our experience in the digital world is more and more enshittified,
+        characterized by ubiquitous surveillance, paywalls and advertising. <em
+          >v2</em
+        > is
+        <a
+          href="https://oktana.dev"
+          class="text-purple-500"
+          target="_blank"
+          rel="noopener">our</a
+        > first attempt to reverse this trend: it doesn't track your behavior or
+        try to lock you in. It's a tool that is meant to enhance your capacity for
+        thinking, creating knowledge and collaborating without distractions. It is
+        also interoperable, trying to be a part of your creative workflow and not
+        monopolize it. Its source code is open, which makes it part of a global knowledge
+        commons that is revolutionizing the way we produce and collaborate using
+        digital media.
+      </p>
+      <p class={textClasses}>
+        But all the above make <em>v2</em> resistant to becoming a commodity, which
+        is something expected and desirable for us: we aim to decommodify knowledge
+        production and social life as much as possible. This makes it really hard
+        for the project to be sustainable economically without a continuous support
+        from our user community. Quality software is expensive to build and maintain:
+        designing an intuitive user experience, implementing features, fixing bugs,
+        responding to issues, keeping up with operating system changes, improving
+        performance. Also, the reality is that <em>v2</em> competes with big-tech
+        alternatives leveraging infinitely more resources, worker exploitation and
+        ecosystem lock-in.
+      </p>
+      <p class={textClasses}>
+        Your support is the best way to ensure that <em>v2</em> stays well-maintained,
+        independent and open.
+      </p>
+    </div>
+    <h2
+      class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
+    >
+      Choose how you'd like to contribute
+    </h2>
+    <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
+      <a
+        href="https://opencollective.com/oktana"
+        target="_blank"
+        rel="noopener"
+      >
+        <OutlineButton
+          icon="open-collective"
+          text="Open Collective"
+          size="lg"
+          classes="w-full sm:w-auto"
+        />
+      </a>
+      <a
+        href="https://github.com/sponsors/oktana-coop"
+        target="_blank"
+        rel="noopener"
+      >
+        <OutlineButton
+          icon="fa-github"
+          text="GitHub Sponsors"
+          size="lg"
+          classes="w-full sm:w-auto"
+        />
+      </a>
+    </div>
+  </div>
+</div>

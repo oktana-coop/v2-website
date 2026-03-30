@@ -26,22 +26,31 @@ import { textClasses } from '../../components/typography/textStyles.ts';
     <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
       <div class="flex flex-col items-center gap-2">
         <OSDetectionButton />
-        <p class="text-sm text-gray-500">
+        <p class="text-sm">
           <a href="/downloads" class="text-purple-500 hover:text-purple-600">
-            More platforms
+            More Platforms
           </a>
         </p>
       </div>
-      <a
-        href="https://oktana.dev/blog/introducing-v2-editor"
-        target="_blank"
-        rel="noopener"
-        ><OutlineButton
-          text="Read the Manifesto"
-          size="lg"
-          classes="w-full sm:w-auto"
-        /></a
-      >
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-full">
+          <a
+            href="https://oktana.dev/blog/introducing-v2-editor"
+            target="_blank"
+            rel="noopener"
+            ><OutlineButton
+              text="Read the Manifesto"
+              size="lg"
+              classes="w-full sm:w-auto"
+            /></a
+          >
+        </div>
+        <p class="text-sm">
+          <a href="#why-support" class="text-purple-500 hover:text-purple-600">
+            Why Support?
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 
