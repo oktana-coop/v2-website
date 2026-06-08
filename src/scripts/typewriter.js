@@ -1,6 +1,6 @@
 // Typewriter Effect
 function initTypewriter() {
-  const text = 'Edit Fearlessly. Collaborate Asynchronously.';
+  const text = 'Write Fearlessly. On Your Terms.';
   const typewriterElement = document.getElementById('typewriter-text');
   const cursorElement = document.getElementById('typewriter-cursor');
   let charIndex = 0;
@@ -15,9 +15,9 @@ function initTypewriter() {
       end: text.indexOf('Fearlessly') + 'Fearlessly'.length,
     },
     {
-      word: 'Asynchronously',
-      start: text.indexOf('Asynchronously'),
-      end: text.indexOf('Asynchronously') + 'Asynchronously'.length,
+      word: 'Your',
+      start: text.indexOf('Your'),
+      end: text.indexOf('Your') + 'Your'.length,
     },
   ];
 
