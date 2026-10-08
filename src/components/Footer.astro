@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import oktanaLogo from '../assets/images/oktana-logo.svg';
 import Button from './actions/buttons/SolidButton.astro';
 import {
+  BLUESKY_URL,
   GITHUB_REPO_URL,
   MASTODON_URL,
   MATRIX_ROOM_URL,
@@ -76,6 +77,13 @@ import {
               aria-hidden="true"
               class="-ml-0.5 size-5"
             />
+          </a>
+          <a
+            href={BLUESKY_URL}
+            aria-label="v2 on Bluesky"
+            class="no-underline text-opacity-90 flex items-center"
+          >
+            <Icon name="fa-bsky" aria-hidden="true" class="-ml-0.5 size-5" />
           </a>
           <a
             href={MATRIX_ROOM_URL}

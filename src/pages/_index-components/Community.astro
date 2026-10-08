@@ -3,7 +3,7 @@ import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import SectionHeading from '../../components/typography/SectionHeading.astro';
 import { textClasses } from '../../components/typography/textStyles.ts';
 import {
-  GITHUB_REPO_URL,
+  BLUESKY_URL,
   MASTODON_URL,
   MATRIX_ROOM_URL,
 } from '../../lib/community';
@@ -39,13 +39,8 @@ const linkClasses = 'text-purple-500 hover:text-purple-600';
         Mastodon
       </a>
       and
-      <a
-        href={GITHUB_REPO_URL}
-        target="_blank"
-        rel="noopener"
-        class={linkClasses}
-      >
-        GitHub
+      <a href={BLUESKY_URL} target="_blank" rel="noopener" class={linkClasses}>
+        Bluesky
       </a>
     </p>
   </div>
