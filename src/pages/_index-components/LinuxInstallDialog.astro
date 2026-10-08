@@ -1,12 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
-import AptInstallCommands from './AptInstallCommands.astro';
-import DownloadArtifact from './DownloadArtifact.astro';
+import AptInstallCommands from '../../components/AptInstallCommands.astro';
+import DownloadArtifact from '../../components/DownloadArtifact.astro';
 import {
   DEFAULT_VERSION,
   GITHUB_RELEASES_BASE_URL,
   linuxAssets,
-} from '../lib/downloads';
+} from '../../lib/downloads';
 
 const tabClasses =
   'linux-install-tab -mb-px border-b-2 border-transparent pb-2 text-sm font-semibold text-gray-500 hover:text-gray-700 aria-selected:border-purple-500 aria-selected:text-purple-600 cursor-pointer';
@@ -95,7 +95,7 @@ const tabClasses =
 </dialog>
 
 <script>
-  import { updateDownloadLinks } from '../scripts/latest-release';
+  import { updateDownloadLinks } from '../../scripts/latest-release';
 
   const dialog = document.getElementById(
     'linux-install-dialog'

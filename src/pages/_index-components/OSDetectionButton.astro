@@ -1,5 +1,5 @@
 ---
-import SolidButton from './actions/buttons/SolidButton.astro';
+import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import LinuxInstallDialog from './LinuxInstallDialog.astro';
 ---
 
@@ -21,9 +21,9 @@ import LinuxInstallDialog from './LinuxInstallDialog.astro';
 </div>
 
 <script>
-  import AppleIcon from '../assets/icons/fa-apple.svg?raw';
-  import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
-  import { getLatestRelease } from '../scripts/latest-release';
+  import AppleIcon from '../../assets/icons/fa-apple.svg?raw';
+  import WindowsIcon from '../../assets/icons/fa-windows.svg?raw';
+  import { getLatestRelease } from '../../scripts/latest-release';
 
   async function initOSDetection() {
     try {
