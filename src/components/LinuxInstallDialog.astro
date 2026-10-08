@@ -1,0 +1,148 @@
+---
+import { Icon } from 'astro-icon/components';
+import AptInstallCommands from './AptInstallCommands.astro';
+import DownloadArtifact from './DownloadArtifact.astro';
+import {
+  DEFAULT_VERSION,
+  GITHUB_RELEASES_BASE_URL,
+  linuxAssets,
+} from '../lib/downloads';
+
+const tabClasses =
+  'linux-install-tab -mb-px border-b-2 border-transparent pb-2 text-sm font-semibold text-gray-500 hover:text-gray-700 aria-selected:border-purple-500 aria-selected:text-purple-600 cursor-pointer';
+---
+
+<dialog
+  id="linux-install-dialog"
+  aria-labelledby="linux-install-dialog-title"
+  class="m-auto w-[calc(100%-2rem)] max-w-2xl bg-white shadow-xl backdrop:bg-black/40"
+>
+  <div class="p-6">
+    <div class="mb-4 flex items-start justify-between gap-4">
+      <h2
+        id="linux-install-dialog-title"
+        class="flex items-center gap-2 text-xl font-semibold"
+      >
+        <Icon name="fa-linux" aria-hidden="true" class="size-7" />
+        Install v2 on Linux
+      </h2>
+      <form method="dialog">
+        <button
+          aria-label="Close"
+          class="-mr-2 -mt-1 px-2 text-2xl leading-none text-gray-400 hover:text-gray-700 cursor-pointer"
+        >
+          &times;
+        </button>
+      </form>
+    </div>
+
+    <div role="tablist" class="mb-5 flex gap-6 border-b border-gray-200">
+      <button
+        type="button"
+        role="tab"
+        id="linux-install-tab-apt"
+        aria-selected="true"
+        aria-controls="linux-install-panel-apt"
+        class={tabClasses}
+      >
+        Ubuntu / Debian
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="linux-install-tab-other"
+        aria-selected="false"
+        aria-controls="linux-install-panel-other"
+        tabindex="-1"
+        class={tabClasses}
+      >
+        Other formats
+      </button>
+    </div>
+
+    <div
+      role="tabpanel"
+      id="linux-install-panel-apt"
+      aria-labelledby="linux-install-tab-apt"
+    >
+      <AptInstallCommands />
+    </div>
+
+    <div
+      role="tabpanel"
+      id="linux-install-panel-other"
+      aria-labelledby="linux-install-tab-other"
+      hidden
+    >
+      <p class="mb-3 text-sm/6 text-gray-700">
+        These packages don't update automatically. Download new versions from
+        this site.
+      </p>
+      <div class="-mx-3 space-y-1">
+        {
+          linuxAssets.map((asset) => (
+            <DownloadArtifact
+              name={asset.name}
+              file={asset.file}
+              version={DEFAULT_VERSION}
+              baseUrl={GITHUB_RELEASES_BASE_URL}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { updateDownloadLinks } from '../scripts/latest-release';
+
+  const dialog = document.getElementById(
+    'linux-install-dialog'
+  ) as HTMLDialogElement | null;
+
+  if (dialog) {
+    // The content wrapper covers the whole dialog, so a click on the dialog
+    // itself is a click on the backdrop
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+
+    const tabs = Array.from(
+      dialog.querySelectorAll<HTMLButtonElement>('.linux-install-tab')
+    );
+
+    const selectTab = (selected: HTMLButtonElement) => {
+      tabs.forEach((tab) => {
+        const isSelected = tab === selected;
+        tab.setAttribute('aria-selected', String(isSelected));
+        tab.tabIndex = isSelected ? 0 : -1;
+        const panelId = tab.getAttribute('aria-controls');
+        const panel = panelId && document.getElementById(panelId);
+        if (panel) {
+          panel.hidden = !isSelected;
+        }
+      });
+    };
+
+    // Always reopen on the recommended tab
+    dialog.addEventListener('close', () => selectTab(tabs[0]));
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+          return;
+        }
+        const offset = event.key === 'ArrowRight' ? 1 : -1;
+        const next = tabs[(index + offset + tabs.length) % tabs.length];
+        selectTab(next);
+        next.focus();
+      });
+    });
+  }
+
+  updateDownloadLinks();
+</script>

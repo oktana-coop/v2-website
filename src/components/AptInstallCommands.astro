@@ -1,0 +1,15 @@
+---
+import TerminalCommands from './TerminalCommands.astro';
+import { APT_INSTALL_COMMANDS } from '../lib/downloads';
+---
+
+<div class="flex flex-col gap-3">
+  <p class="text-sm/6 text-gray-700">
+    Run these commands in a terminal. They add the v2 repository, so v2 updates
+    with the rest of your system.
+  </p>
+
+  <TerminalCommands commands={APT_INSTALL_COMMANDS} />
+
+  <p class="text-sm/6 text-gray-500">You only need to do this once.</p>
+</div>

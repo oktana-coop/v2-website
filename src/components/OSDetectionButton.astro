@@ -1,5 +1,6 @@
 ---
 import SolidButton from './actions/buttons/SolidButton.astro';
+import LinuxInstallDialog from './LinuxInstallDialog.astro';
 ---
 
 <div id="os-detection-container" class="w-full">
@@ -16,15 +17,23 @@ import SolidButton from './actions/buttons/SolidButton.astro';
       classes="w-full sm:w-auto"
     />
   </a>
+  <LinuxInstallDialog />
 </div>
 
 <script>
   import AppleIcon from '../assets/icons/fa-apple.svg?raw';
   import WindowsIcon from '../assets/icons/fa-windows.svg?raw';
+  import { getLatestRelease } from '../scripts/latest-release';
 
   async function initOSDetection() {
     try {
       function detectOS() {
+        // Lets us preview other platforms, e.g. /?os=linux
+        const override = new URLSearchParams(window.location.search).get('os');
+        if (override === 'linux') return 'Linux';
+        if (override === 'windows') return 'Windows';
+        if (override === 'macos') return 'Mac OS';
+
         const userAgent = window.navigator.userAgent;
         const platform =
           (window.navigator as any)?.userAgentData?.platform ||
@@ -53,38 +62,8 @@ import SolidButton from './actions/buttons/SolidButton.astro';
         return 'Mac OS'; // Default fallback
       }
 
-      function detectArchitecture() {
-        const userAgent = window.navigator.userAgent;
-        const platform =
-          (window.navigator as any)?.userAgentData?.platform ||
-          window.navigator.platform;
-
-        // Check for ARM architecture indicators
-        if (/arm|aarch64/i.test(userAgent) || /arm|aarch64/i.test(platform)) {
-          return 'arm64';
-        }
-
-        // Default to x86_64
-        return 'x86_64';
-      }
-
       const detectedOS = detectOS();
-      const detectedArch = detectArchitecture();
 
-      // Fetch latest version from GitHub API
-      const response = await fetch(
-        'https://api.github.com/repos/oktana-coop/v2/releases/latest'
-      );
-      if (!response.ok) {
-        console.warn('Could not fetch latest version, using fallback');
-        return; // Keep default links
-      }
-
-      const data = await response.json();
-      const latestVersion = data.tag_name.replace(/^v/, '');
-      const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
-
-      // Update button based on detected OS
       const downloadBtnLink = document.getElementById(
         'download-btn-link'
       ) as HTMLAnchorElement;
@@ -99,17 +78,38 @@ import SolidButton from './actions/buttons/SolidButton.astro';
         return; // Elements not found
       }
 
+      if (detectedOS === 'Linux' || detectedOS === 'Android') {
+        // There is no single file to download on Linux, so the button opens
+        // the install instructions. The link is the fallback for opening it in
+        // a new tab.
+        downloadBtnText.textContent = 'Install on Linux (Alpha)';
+        downloadBtnIcon.style.display = 'none';
+        downloadBtnLink.href = '/downloads#linux';
+        downloadBtnLink.setAttribute('aria-haspopup', 'dialog');
+        downloadBtnLink.addEventListener('click', (event) => {
+          event.preventDefault();
+          (
+            document.getElementById(
+              'linux-install-dialog'
+            ) as HTMLDialogElement | null
+          )?.showModal();
+        });
+        return;
+      }
+
+      const release = await getLatestRelease();
+      if (!release) {
+        return; // Keep default links
+      }
+
+      const latestVersion = release.version;
+      const baseUrl = `https://github.com/oktana-coop/v2/releases/download/v${latestVersion}`;
+
       switch (detectedOS) {
         case 'Windows':
           downloadBtnText.textContent = 'Download for Windows (Alpha)';
           downloadBtnIcon.innerHTML = WindowsIcon;
           downloadBtnLink.href = `${baseUrl}/v2-Setup-${latestVersion}.exe`;
-          break;
-        case 'Linux':
-        case 'Android':
-          downloadBtnText.textContent = 'Download for Linux (Alpha)';
-          downloadBtnIcon.style.display = 'none';
-          downloadBtnLink.href = `${baseUrl}/v2-${latestVersion}-${detectedArch}.AppImage`;
           break;
         case 'Mac OS':
         case 'iOS':

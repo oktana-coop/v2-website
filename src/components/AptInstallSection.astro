@@ -1,0 +1,37 @@
+---
+import AptInstallCommands from './AptInstallCommands.astro';
+import TerminalCommands from './TerminalCommands.astro';
+import {
+  APT_REMOVE_REPOSITORY_COMMAND,
+  APT_UNINSTALL_COMMAND,
+} from '../lib/downloads';
+---
+
+<div>
+  <h3 class="mb-3 flex items-center gap-3 font-semibold">
+    Ubuntu / Debian
+    <span
+      class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium"
+    >
+      Recommended
+    </span>
+  </h3>
+
+  <AptInstallCommands />
+
+  <details class="mt-3">
+    <summary
+      class="cursor-pointer text-sm/6 font-medium text-purple-500 hover:text-purple-600"
+    >
+      Uninstall
+    </summary>
+    <div class="mt-3 flex flex-col gap-3">
+      <p class="text-sm/6 text-gray-700">Remove v2:</p>
+      <TerminalCommands commands={[APT_UNINSTALL_COMMAND]} />
+      <p class="text-sm/6 text-gray-700">
+        To also remove the v2 repository and its signing key:
+      </p>
+      <TerminalCommands commands={[APT_REMOVE_REPOSITORY_COMMAND]} />
+    </div>
+  </details>
+</div>

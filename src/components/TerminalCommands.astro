@@ -1,0 +1,51 @@
+---
+interface Props {
+  commands: string[];
+}
+
+const { commands } = Astro.props;
+---
+
+<div class="terminal-commands bg-neutral-900 text-neutral-100">
+  <div
+    class="flex items-center justify-between border-b border-white/10 px-4 py-1.5"
+  >
+    <span class="text-xs text-neutral-400">Terminal</span>
+    <button
+      type="button"
+      class="terminal-copy-button text-xs font-semibold text-neutral-200 hover:text-white px-2 py-1 -mr-2 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-400"
+      data-commands={commands.join('\n')}
+      aria-live="polite"
+    >
+      Copy
+    </button>
+  </div>
+  <pre
+    class="overflow-x-auto p-4 font-mono text-[13px]/6"><code>{commands.map((command) => <span class="block before:content-['$_'] before:text-neutral-500 before:select-none">{command}</span>)}</code></pre>
+</div>
+
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>('.terminal-copy-button')
+    .forEach((button) => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.commands ?? '');
+          button.textContent = 'Copied';
+        } catch {
+          // Select the commands so that the user can copy them manually
+          const code = button
+            .closest('.terminal-commands')
+            ?.querySelector('code');
+          if (code) {
+            window.getSelection()?.selectAllChildren(code);
+          }
+          button.textContent = 'Press Ctrl+C';
+        }
+
+        setTimeout(() => {
+          button.textContent = 'Copy';
+        }, 2000);
+      });
+    });
+</script>

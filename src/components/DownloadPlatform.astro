@@ -1,12 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import DownloadArtifact from './DownloadArtifact.astro';
-
-interface DownloadAsset {
-  name: string;
-  file: string;
-  recommended?: boolean;
-}
+import type { DownloadAsset } from '../lib/downloads';
 
 interface Props {
   category: string;
@@ -19,11 +14,15 @@ interface Props {
 const { category, icon, assets, version, baseUrl } = Astro.props;
 ---
 
-<div class="border-b border-gray-100 pb-6 last:border-b-0">
+<div
+  id={category.toLowerCase()}
+  class="scroll-mt-6 border-b border-gray-100 pb-6 last:border-b-0"
+>
   <h2 class="text-lg font-semibold mb-4 flex items-center gap-3">
     <Icon name={icon} class="w-5 h-5 text-gray-600" />
     {category}
   </h2>
+  <slot />
   <div class="space-y-1">
     {assets.map(asset => (
       <DownloadArtifact 
