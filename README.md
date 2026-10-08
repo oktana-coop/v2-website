@@ -33,11 +33,4 @@ GITHUB_TOKEN=your_github_token_here
 
 ## Deployment
 
-### GitHub Pages (Recommended)
-
-The website is deployed to [GitHub Pages](https://docs.github.com/en/pages) using GitHub Actions.
-
-**Setup:**
-
-1. The workflow in `.github/workflows/deploy.yml` automatically uses GitHub's built-in token
-2. Push to `main` branch triggers automatic deployment
+The website is deployed to [Netlify](https://www.netlify.com/), using the [`@astrojs/netlify`](https://docs.astro.build/en/guides/integrations-guide/netlify/) adapter.
