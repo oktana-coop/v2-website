@@ -1,35 +1,58 @@
 # v2 Website
 
-This is the codebase for the [v2 website](https://v2editor.com/).
-
-Built using [Astro](https://astro.build/).
+The codebase for the [v2 website](https://v2editor.com/), built with [Astro](https://astro.build/).
 
 ## Development
 
-These are the basic commands used for development:
+### Recommended tooling/practices
 
-| Command           | Action                                       |
-| :---------------- | :------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:4321`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
+- Package manager: npm
+- Node (version listed on `.nvmrc`)
+- Commit style: [Conventional commits](https://www.conventionalcommits.org/)
 
-### Environment Variables
+### Install
 
-For local development, create a `.env` file in the root directory:
-
-```bash
-# GitHub Personal Access Token (for higher API rate limits)
-GITHUB_TOKEN=your_github_token_here
+```sh
+npm install
 ```
 
-**Getting a GitHub Token:**
+### Run
 
-1. Go to [GitHub Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
-2. Generate new token (classic)
-3. No special permissions needed for public repo releases
-4. Copy the token and add it to your `.env` file
+```sh
+npm run dev
+```
+
+The site runs at `http://localhost:4321`. To see the download button for another platform, add `?os=linux`, `?os=windows` or `?os=macos` to the URL.
+
+### Testing
+
+End-to-end tests use [Playwright](https://playwright.dev/), running against the production build. Download Playwright's Chromium once:
+
+```sh
+npx playwright install chromium
+```
+
+Run the tests:
+
+```sh
+npm run test:e2e
+```
+
+Open the Playwright UI (test timeline, action logs, screenshots):
+
+```sh
+npm run test:e2e:ui
+```
+
+Test files live in `e2e/`. Results (HTML report, failure screenshots, traces) are written to `e2e-results/`.
+
+### Build
+
+```sh
+npm run build
+```
+
+This builds the site under the `dist` directory.
 
 ## Deployment
 
