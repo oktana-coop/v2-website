@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import AptInstallCommands from '../../components/AptInstallCommands.astro';
 import DownloadArtifact from '../../components/DownloadArtifact.astro';
+import { MATRIX_ROOM_URL } from '../../lib/community';
 import { linuxAssets } from '../../lib/downloads';
 
 const tabClasses =
@@ -80,6 +81,18 @@ const tabClasses =
         ))}
       </div>
     </div>
+
+    <p class="mt-6 border-t border-gray-200 pt-4 text-sm/6 text-gray-500">
+      Running into trouble? We're happy to help in our
+      <a
+        href={MATRIX_ROOM_URL}
+        target="_blank"
+        rel="noopener"
+        class="text-purple-500 hover:text-purple-600"
+      >
+        Matrix room
+      </a>
+    </p>
   </div>
 </dialog>
 

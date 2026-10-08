@@ -3,6 +3,11 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import oktanaLogo from '../assets/images/oktana-logo.svg';
 import Button from './actions/buttons/SolidButton.astro';
+import {
+  GITHUB_REPO_URL,
+  MASTODON_URL,
+  MATRIX_ROOM_URL,
+} from '../lib/community';
 ---
 
 <footer class="flex-initial flex flex-col px-6 py-4 mt-30 mb-20">
@@ -62,7 +67,8 @@ import Button from './actions/buttons/SolidButton.astro';
       <div class="flex">
         <div class="flex-auto flex gap-5 align-center">
           <a
-            href="https://mastodon.social/@v2editor"
+            href={MASTODON_URL}
+            aria-label="v2 on Mastodon"
             class="no-underline text-opacity-90 flex items-center"
           >
             <Icon
@@ -72,13 +78,15 @@ import Button from './actions/buttons/SolidButton.astro';
             />
           </a>
           <a
-            href="https://matrix.to/#/#v2editor-general:matrix.org"
+            href={MATRIX_ROOM_URL}
+            aria-label="v2 on Matrix"
             class="no-underline text-opacity-90 flex items-center"
           >
             <Icon name="fa-matrix" aria-hidden="true" class="-ml-0.5 size-5" />
           </a>
           <a
-            href="https://github.com/oktana-coop/v2"
+            href={GITHUB_REPO_URL}
+            aria-label="v2 on GitHub"
             class="no-underline text-opacity-90 flex items-center"
           >
             <Icon name="fa-github" aria-hidden="true" class="-ml-0.5 size-5" />
