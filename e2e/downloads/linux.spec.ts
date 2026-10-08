@@ -2,6 +2,7 @@ import {
   APT_INSTALL_COMMANDS,
   APT_REMOVE_REPOSITORY_COMMAND,
   APT_UNINSTALL_COMMAND,
+  LATEST_RELEASE_PAGE_URL,
 } from '../../src/lib/downloads';
 import { expect, fakeAssetUrl, test } from '../shared/fixtures';
 import { readClipboard } from '../shared/helpers';
@@ -37,6 +38,16 @@ test.describe('downloads page, Linux section', () => {
     await expect(
       page.locator('#linux').getByRole('link', { name: 'RPM', exact: true })
     ).toHaveAttribute('href', fakeAssetUrl('v2-9.9.9-x86_64.rpm'));
+  });
+
+  test.describe('when the releases API fails', () => {
+    test.use({ releaseApiFails: true });
+
+    test('links other formats to the releases page', async ({ page }) => {
+      await expect(
+        page.locator('#linux').getByRole('link', { name: 'RPM', exact: true })
+      ).toHaveAttribute('href', LATEST_RELEASE_PAGE_URL);
+    });
   });
 
   test.describe('on a phone', () => {

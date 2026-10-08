@@ -1,8 +1,8 @@
-// This doesn't really matter, it's just a placeholder for the links, before they are updated by the script
-export const DEFAULT_VERSION = '0.6.6';
+export const LATEST_RELEASE_PAGE_URL =
+  'https://github.com/oktana-coop/v2/releases/latest';
 
-export const GITHUB_RELEASES_BASE_URL =
-  'https://github.com/oktana-coop/v2/releases/download';
+// Stands for the release version in asset file names
+export const VERSION_PLACEHOLDER = '{version}';
 
 export interface DownloadAsset {
   name: string;
@@ -17,12 +17,15 @@ export interface DownloadPlatform {
 }
 
 export const linuxAssets: DownloadAsset[] = [
-  { name: 'AppImage', file: `v2-${DEFAULT_VERSION}-x86_64.AppImage` },
-  { name: 'AppImage (ARM64)', file: `v2-${DEFAULT_VERSION}-arm64.AppImage` },
-  { name: 'Deb', file: `v2-${DEFAULT_VERSION}-amd64.deb` },
-  { name: 'Deb (ARM64)', file: `v2-${DEFAULT_VERSION}-arm64.deb` },
-  { name: 'RPM', file: `v2-${DEFAULT_VERSION}-x86_64.rpm` },
-  { name: 'RPM (ARM64)', file: `v2-${DEFAULT_VERSION}-aarch64.rpm` },
+  { name: 'AppImage', file: `v2-${VERSION_PLACEHOLDER}-x86_64.AppImage` },
+  {
+    name: 'AppImage (ARM64)',
+    file: `v2-${VERSION_PLACEHOLDER}-arm64.AppImage`,
+  },
+  { name: 'Deb', file: `v2-${VERSION_PLACEHOLDER}-amd64.deb` },
+  { name: 'Deb (ARM64)', file: `v2-${VERSION_PLACEHOLDER}-arm64.deb` },
+  { name: 'RPM', file: `v2-${VERSION_PLACEHOLDER}-x86_64.rpm` },
+  { name: 'RPM (ARM64)', file: `v2-${VERSION_PLACEHOLDER}-aarch64.rpm` },
 ];
 
 export const downloads: DownloadPlatform[] = [
@@ -32,17 +35,19 @@ export const downloads: DownloadPlatform[] = [
     assets: [
       {
         name: 'Universal',
-        file: `v2-${DEFAULT_VERSION}-universal.dmg`,
+        file: `v2-${VERSION_PLACEHOLDER}-universal.dmg`,
         recommended: true,
       },
-      { name: 'Intel', file: `v2-${DEFAULT_VERSION}.dmg` },
-      { name: 'Apple Silicon', file: `v2-${DEFAULT_VERSION}-arm64.dmg` },
+      { name: 'Intel', file: `v2-${VERSION_PLACEHOLDER}.dmg` },
+      { name: 'Apple Silicon', file: `v2-${VERSION_PLACEHOLDER}-arm64.dmg` },
     ],
   },
   {
     category: 'Windows',
     icon: 'fa-windows',
-    assets: [{ name: 'Installer', file: `v2-Setup-${DEFAULT_VERSION}.exe` }],
+    assets: [
+      { name: 'Installer', file: `v2-Setup-${VERSION_PLACEHOLDER}.exe` },
+    ],
   },
   {
     category: 'Linux',

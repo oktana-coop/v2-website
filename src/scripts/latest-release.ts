@@ -1,3 +1,5 @@
+import { VERSION_PLACEHOLDER } from '../lib/downloads';
+
 const LATEST_RELEASE_URL =
   'https://api.github.com/repos/oktana-coop/v2/releases/latest';
 
@@ -44,18 +46,12 @@ export async function updateDownloadLinks() {
   document
     .querySelectorAll<HTMLAnchorElement>('.download-link')
     .forEach((link) => {
-      const originalFile = link.dataset.file;
-      if (!originalFile) {
-        return;
-      }
-
-      // Generate the expected filename for the new version
-      const expectedFileName = originalFile.replace(
-        /\d+\.\d+\.\d+/g,
+      const file = link.dataset.file?.replaceAll(
+        VERSION_PLACEHOLDER,
         release.version
       );
-      if (release.assetUrls[expectedFileName]) {
-        link.href = release.assetUrls[expectedFileName];
+      if (file && release.assetUrls[file]) {
+        link.href = release.assetUrls[file];
       }
     });
 }

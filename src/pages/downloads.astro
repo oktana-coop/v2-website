@@ -5,11 +5,7 @@ import NavigationBar from '../components/navigation/NavigationBar.astro';
 import Footer from '../components/Footer.astro';
 import DownloadPlatform from './_downloads-components/DownloadPlatform.astro';
 import AptInstallSection from './_downloads-components/AptInstallSection.astro';
-import {
-  DEFAULT_VERSION,
-  GITHUB_RELEASES_BASE_URL,
-  downloads,
-} from '../lib/downloads';
+import { downloads } from '../lib/downloads';
 ---
 
 <Layout title="Download V2 - All Platforms and Formats">
@@ -19,7 +15,7 @@ import {
       
       <div class="text-center mb-8">
         <h1 class="text-3xl font-semibold mb-2">Download V2</h1>
-        <p class="text-gray-500 text-sm" id="version-display" style="opacity: 0; transition: opacity 0.3s;">v{DEFAULT_VERSION}</p>
+        <p class="text-gray-500 text-sm min-h-5" id="version-display" style="opacity: 0; transition: opacity 0.3s;"></p>
       </div>
 
       <div class="space-y-8" id="downloads-container">
@@ -28,8 +24,6 @@ import {
             category={platform.category}
             icon={platform.icon}
             assets={platform.assets}
-            version={DEFAULT_VERSION}
-            baseUrl={GITHUB_RELEASES_BASE_URL}
           >
             {platform.category === 'Linux' && (
               <div class="px-3">

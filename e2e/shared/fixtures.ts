@@ -1,6 +1,6 @@
 import { expect, test as base } from '@playwright/test';
 
-import { DEFAULT_VERSION, downloads } from '../../src/lib/downloads';
+import { downloads, VERSION_PLACEHOLDER } from '../../src/lib/downloads';
 
 const LATEST_RELEASE_URL =
   'https://api.github.com/repos/oktana-coop/v2/releases/latest';
@@ -15,7 +15,10 @@ const fakeRelease = {
   assets: downloads
     .flatMap((platform) => platform.assets)
     .map((asset) => {
-      const name = asset.file.replaceAll(DEFAULT_VERSION, FAKE_RELEASE_VERSION);
+      const name = asset.file.replaceAll(
+        VERSION_PLACEHOLDER,
+        FAKE_RELEASE_VERSION
+      );
       return { name, browser_download_url: fakeAssetUrl(name) };
     }),
 };

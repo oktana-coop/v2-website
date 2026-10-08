@@ -1,18 +1,18 @@
 ---
+import { LATEST_RELEASE_PAGE_URL } from '../lib/downloads';
+
 interface Props {
   name: string;
   file: string;
-  version: string;
-  baseUrl: string;
   recommended?: boolean;
 }
 
-const { name, file, version, baseUrl, recommended } = Astro.props;
+const { name, file, recommended } = Astro.props;
 ---
 
 <div class="flex items-center gap-3 py-1.5 px-3 hover:bg-purple-50 rounded-md transition-colors">
   <a 
-    href={`${baseUrl}/v${version}/${file}`} 
+    href={LATEST_RELEASE_PAGE_URL}
     class="text-purple-500 hover:text-purple-600 font-medium transition-colors download-link"
     data-file={file}
   >

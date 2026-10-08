@@ -7,11 +7,9 @@ interface Props {
   category: string;
   icon: string;
   assets: DownloadAsset[];
-  version: string;
-  baseUrl: string;
 }
 
-const { category, icon, assets, version, baseUrl } = Astro.props;
+const { category, icon, assets } = Astro.props;
 ---
 
 <div
@@ -28,8 +26,6 @@ const { category, icon, assets, version, baseUrl } = Astro.props;
       <DownloadArtifact 
         name={asset.name}
         file={asset.file}
-        version={version}
-        baseUrl={baseUrl}
         recommended={asset.recommended}
       />
     ))}
