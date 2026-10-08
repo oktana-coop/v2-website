@@ -12,15 +12,18 @@ import { downloads } from '../lib/downloads';
   <MainContainer>
     <NavigationBar />
     <div class="w-full max-w-4xl mx-auto p-6">
-      
       <div class="text-center mb-8">
         <h1 class="text-3xl font-semibold mb-2">Download V2</h1>
-        <p class="text-gray-500 text-sm min-h-5" id="version-display" style="opacity: 0; transition: opacity 0.3s;"></p>
+        <p
+          class="text-gray-500 text-sm min-h-5"
+          id="version-display"
+          style="opacity: 0; transition: opacity 0.3s;"
+        ></p>
       </div>
 
       <div class="space-y-8" id="downloads-container">
-        {downloads.map(platform => (
-          <DownloadPlatform 
+        {downloads.map((platform) => (
+          <DownloadPlatform
             category={platform.category}
             icon={platform.icon}
             assets={platform.assets}
@@ -40,10 +43,19 @@ import { downloads } from '../lib/downloads';
       </div>
 
       <div class="text-center mt-8 pt-6 border-t border-gray-100">
-        <p class="text-sm text-gray-500">View all releases on <a href="https://github.com/oktana-coop/v2/releases" target="_blank" class="text-purple-500 hover:text-purple-600 font-medium">GitHub</a></p>
+        <p class="text-sm text-gray-500">
+          View all releases on{' '}
+          <a
+            href="https://github.com/oktana-coop/v2/releases"
+            target="_blank"
+            class="text-purple-500 hover:text-purple-600 font-medium"
+          >
+            GitHub
+          </a>
+        </p>
       </div>
     </div>
-    
+
     <Footer />
   </MainContainer>
 </Layout>

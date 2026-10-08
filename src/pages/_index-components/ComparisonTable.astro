@@ -212,9 +212,8 @@ const comparisonOptions: ProductCapabilities[] = [
   <div class="flex flex-col items-center gap-4">
     <SectionHeading text="How is v2 Different" classes="text-center" />
     <p class={`text-center max-w-xl ${textClasses}`}>
-      v2 gives you the collaboration capabilities of cloud-based editors (<i
-        >and more</i
-      >) without sacrificing data ownership
+      v2 gives you the collaboration capabilities of cloud-based editors (
+      <i>and more</i>) without sacrificing data ownership
     </p>
   </div>
 
@@ -226,10 +225,7 @@ const comparisonOptions: ProductCapabilities[] = [
           aria-hidden="true"
           class="flex w-1/5 px-4"
         >
-          <div
-            class="w-full rounded-t-xl border-x border-t border-gray-900/10 bg-gray-400/5"
-          >
-          </div>
+          <div class="w-full rounded-t-xl border-x border-t border-gray-900/10 bg-gray-400/5"></div>
         </div>
       </div>
       <table class="w-full table-fixed border-collapse text-left">
@@ -246,69 +242,65 @@ const comparisonOptions: ProductCapabilities[] = [
         <thead>
           <tr>
             <td></td>
-            {
-              comparisonOptions.map((option) => (
-                <th scope="col" class="px-6 pt-6 xl:px-8 xl:pt-8">
-                  <div class="text-sm/7 text-center font-semibold text-gray-900">
-                    {option.logo ? (
-                      <Image
-                        src={v2Logo}
-                        alt={option.name}
-                        height="40"
-                        class="h-[40px] inline"
-                      />
-                    ) : (
-                      option.name
-                    )}
-                  </div>
-                </th>
-              ))
-            }
+            {comparisonOptions.map((option) => (
+              <th scope="col" class="px-6 pt-6 xl:px-8 xl:pt-8">
+                <div class="text-sm/7 text-center font-semibold text-gray-900">
+                  {option.logo ? (
+                    <Image
+                      src={v2Logo}
+                      alt={option.name}
+                      height="40"
+                      class="h-[40px] inline"
+                    />
+                  ) : (
+                    option.name
+                  )}
+                </div>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {
-            comparisonDimensionCategories.map(
-              ({ key: categoryKey, name: categoryName, dimensions }) => (
-                <Fragment>
-                  <tr class="border-b border-gray-900/5">
-                    <th
-                      scope="colgroup"
-                      colspan="4"
-                      class="pb-4 pt-8 text-sm/6 font-semibold text-gray-900"
-                    >
-                      {categoryName}
-                    </th>
-                  </tr>
-                  {dimensions.map(
-                    ({ key: dimensionKey, name: dimensionName }) => (
-                      <tr class="border-b border-gray-900/5">
-                        <th
-                          scope="row"
-                          class="py-4 text-sm/6 font-normal text-gray-900"
-                        >
-                          {dimensionName}
-                        </th>
-                        {comparisonOptions.map((option) => (
-                          <td class="px-6 py-4 xl:px-8">
-                            <div class="flex items-center justify-center gap-2">
-                              <div class="text-center text-sm/6 text-gray-500">
-                                {
-                                  // @ts-ignore
-                                  // TODO: type category and dimension keys properly
-                                  option[categoryKey][dimensionKey]
-                                }
-                              </div>
+          {comparisonDimensionCategories.map(
+            ({ key: categoryKey, name: categoryName, dimensions }) => (
+              <Fragment>
+                <tr class="border-b border-gray-900/5">
+                  <th
+                    scope="colgroup"
+                    colspan="4"
+                    class="pb-4 pt-8 text-sm/6 font-semibold text-gray-900"
+                  >
+                    {categoryName}
+                  </th>
+                </tr>
+                {dimensions.map(
+                  ({ key: dimensionKey, name: dimensionName }) => (
+                    <tr class="border-b border-gray-900/5">
+                      <th
+                        scope="row"
+                        class="py-4 text-sm/6 font-normal text-gray-900"
+                      >
+                        {dimensionName}
+                      </th>
+                      {comparisonOptions.map((option) => (
+                        <td class="px-6 py-4 xl:px-8">
+                          <div class="flex items-center justify-center gap-2">
+                            <div class="text-center text-sm/6 text-gray-500">
+                              {
+                                // @ts-ignore
+                                // TODO: type category and dimension keys properly
+                                option[categoryKey][dimensionKey]
+                              }
                             </div>
-                          </td>
-                        ))}
-                      </tr>
-                    )
-                  )}
-                </Fragment>
-              )
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                  )
+                )}
+              </Fragment>
             )
-          }
+          )}
         </tbody>
       </table>
     </div>

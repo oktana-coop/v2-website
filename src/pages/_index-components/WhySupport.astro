@@ -20,53 +20,51 @@ const defaultTier = tiers[1];
 
 <div id="why-support" class="flex flex-col gap-10">
   <div class="flex flex-col gap-4 md:gap-8">
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center flex items-center justify-center gap-2"
-    >
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center flex items-center justify-center gap-2">
       Why Support
       <Image src={v2Logo} alt="v2" class="h-[1.5em] w-auto" />
     </h2>
     <div class="flex flex-col gap-4">
       <p class={textClasses}>
         Our experience in the digital world is more and more enshittified,
-        characterized by ubiquitous surveillance, paywalls and advertising. <em
-          >v2</em
-        > is
+        characterized by ubiquitous surveillance, paywalls and advertising.{' '}
+        <em>v2</em> is
         <a
           href="https://oktana.dev"
           class="text-purple-500"
           target="_blank"
-          rel="noopener">our</a
-        > first attempt to reverse this trend: it doesn't track your behavior or
-        try to lock you in. It's a tool that is meant to enhance your capacity for
-        thinking, creating knowledge and collaborating without distractions. It is
-        also interoperable, trying to be a part of your creative workflow and not
-        monopolize it. Its source code is open, which makes it part of a global knowledge
-        commons that is revolutionizing the way we produce and collaborate using
-        digital media.
+          rel="noopener"
+        >
+          our
+        </a>{' '}
+        first attempt to reverse this trend: it doesn't track your behavior or
+        try to lock you in. It's a tool that is meant to enhance your capacity
+        for thinking, creating knowledge and collaborating without distractions.
+        It is also interoperable, trying to be a part of your creative workflow
+        and not monopolize it. Its source code is open, which makes it part of a
+        global knowledge commons that is revolutionizing the way we produce and
+        collaborate using digital media.
       </p>
       <p class={textClasses}>
-        But all the above make <em>v2</em> resistant to becoming a <em
-          >commodity</em
-        >, which is something expected and desirable for us: we aim to
-        decommodify knowledge production and social life as much as possible.
-        This makes it <strong>really hard</strong> for the project to be sustainable
-        economically without a continuous support from our user community. Quality
-        software is expensive to build and maintain: designing an intuitive user
-        experience, implementing features, fixing bugs, responding to issues, keeping
-        up with operating system changes, improving performance. Also, the reality
-        is that <em>v2</em> competes with big-tech alternatives leveraging infinitely
-        more resources, worker exploitation and ecosystem lock-in.
+        But all the above make <em>v2</em> resistant to becoming a{' '}
+        <em>commodity</em>, which is something expected and desirable for us: we
+        aim to decommodify knowledge production and social life as much as
+        possible. This makes it <strong>really hard</strong> for the project to
+        be sustainable economically without a continuous support from our user
+        community. Quality software is expensive to build and maintain:
+        designing an intuitive user experience, implementing features, fixing
+        bugs, responding to issues, keeping up with operating system changes,
+        improving performance. Also, the reality is that <em>v2</em> competes
+        with big-tech alternatives leveraging infinitely more resources, worker
+        exploitation and ecosystem lock-in.
       </p>
       <p class={textClasses}>
-        Your support is the best way to ensure that <em>v2</em> stays well-maintained,
-        independent and open.
+        Your support is the best way to ensure that <em>v2</em> stays
+        well-maintained, independent and open.
       </p>
     </div>
     <div class="flex flex-col justify-center items-center gap-4">
-      <h2
-        class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
-      >
+      <h2 class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center">
         Choose how you'd like to contribute
       </h2>
       <div class="flex flex-col justify-center gap-4 w-full sm:max-w-sm">
@@ -82,16 +80,14 @@ const defaultTier = tiers[1];
               variant uses the CSS :checked pseudo-class under the hood,
               which tracks the DOM property, not the HTML attribute.
             -->
-            {
-              tiers.map((tier) => (
-                <RadioSmallCard
-                  value={tier.link}
-                  label={`€${tier.amount}/month`}
-                  group="support-tier"
-                  checked={tier.link === defaultTier.link}
-                />
-              ))
-            }
+            {tiers.map((tier) => (
+              <RadioSmallCard
+                value={tier.link}
+                label={`€${tier.amount}/month`}
+                group="support-tier"
+                checked={tier.link === defaultTier.link}
+              />
+            ))}
           </div>
         </fieldset>
 

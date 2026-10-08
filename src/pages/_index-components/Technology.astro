@@ -51,32 +51,29 @@ const technologies = [
       Standing on the shoulders of giants
     </p>
   </div>
-  <div
-    class="w-full flex flex-col lg:flex-row gap-14 lg:gap-18 items-center lg:justify-around"
-  >
-    {
-      technologies.map((tech) => (
-        <div class="flex flex-col lg:w-1/2 max-w-2xs items-center gap-4 lg:gap-6">
-          <a href={tech.url} target="_blank" rel="noopener">
-            <h3 class="font-sans text-lg font-bold text-center">{tech.name}</h3>
-          </a>
+  <div class="w-full flex flex-col lg:flex-row gap-14 lg:gap-18 items-center lg:justify-around">
+    {technologies.map((tech) => (
+      <div class="flex flex-col lg:w-1/2 max-w-2xs items-center gap-4 lg:gap-6">
+        <a href={tech.url} target="_blank" rel="noopener">
+          <h3 class="font-sans text-lg font-bold text-center">{tech.name}</h3>
+        </a>
 
-          <Image src={tech.logo} alt={`${tech.name} logo`} />
-          <p class={`text-center ${textClasses}`}>{tech.description}</p>
-        </div>
-      ))
-    }
+        <Image src={tech.logo} alt={`${tech.name} logo`} />
+        <p class={`text-center ${textClasses}`}>{tech.description}</p>
+      </div>
+    ))}
   </div>
   <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
     <a
       href="https://oktana.dev/blog/v2-technical-dive/"
       target="_blank"
       rel="noopener"
-      ><OutlineButton
+    >
+      <OutlineButton
         text="Read our Technical Dive"
         size="lg"
         classes="w-full sm:w-auto"
-      /></a
-    >
+      />
+    </a>
   </div>
 </div>

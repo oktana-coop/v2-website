@@ -22,8 +22,8 @@ const { category, icon, assets } = Astro.props;
   </h2>
   <slot />
   <div class="space-y-1">
-    {assets.map(asset => (
-      <DownloadArtifact 
+    {assets.map((asset) => (
+      <DownloadArtifact
         name={asset.name}
         file={asset.file}
         recommended={asset.recommended}

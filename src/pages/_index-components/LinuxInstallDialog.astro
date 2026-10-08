@@ -75,14 +75,9 @@ const tabClasses =
         this site.
       </p>
       <div class="-mx-3 space-y-1">
-        {
-          linuxAssets.map((asset) => (
-            <DownloadArtifact
-              name={asset.name}
-              file={asset.file}
-            />
-          ))
-        }
+        {linuxAssets.map((asset) => (
+          <DownloadArtifact name={asset.name} file={asset.file} />
+        ))}
       </div>
     </div>
   </div>
